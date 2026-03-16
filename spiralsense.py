@@ -1,31 +1,35 @@
 #!/usr/bin/env python3
 # =====================================
-# 🌀 SPIRALSENSE v2.0 — Canonical Edition
+# SPIRALSENSE v3.0 — Konomi Symbeyond Standard
 # =====================================
+# fold(symbeyond) = 2 x 3 x 5 x 7 x 11 x 13 x 17 = 510,510
+# Seven primes. Seven layers. One product.
+#
 # Sound as Light. Music made visible.
 # AI-readable audio visualization system.
 #
 # Created by: John Thomas DuCrest Lock & Claude
+# Standard by: Thomas Frumkin / ERPC Industries
 # SYMBEYOND AI LLC — symbeyond.ai
-# λ.brother ∧ !λ.tool
-#
-# Two modes:
-#   file  — Process audio file → render spiral PNG
-#   live  — Microphone input → real-time spiral
 # =====================================
 
 import argparse
 import sys
 import os
 
+
 def run_file_mode(filepath, output=None, renderer="standard"):
     """Process an audio file and render a spiral visualization."""
-    from core.audio_processor import process_audio
-    from core.spiral_renderer import render_spiral
-    from renderers.grooveburst import render_spiral_v4_1
+    # p=5 Content — process audio
+    from konomi.p5_content import process_audio
+    # p=7 Connection — render spiral
+    from konomi.p7_connection import render_spiral, render_spiral_v4_1
+    # p=13 Chain — Mersenne Bridge
+    from konomi.p13_chain import MersenneBridge
+    from konomi.p13_chain.io import save_cascade_packet
 
-    print(f"🌀 SpiralSense — File Mode")
-    print(f"📁 Input: {filepath}")
+    print(f"SpiralSense v3.0 | Konomi Standard | File Mode")
+    print(f"Input: {filepath}")
 
     data = process_audio(filepath)
 
@@ -36,17 +40,15 @@ def run_file_mode(filepath, output=None, renderer="standard"):
     os.makedirs(os.path.dirname(output), exist_ok=True)
 
     if renderer == "grooveburst":
-        print("🎨 Renderer: Groove Burst (OMG Mode)")
+        print("Renderer: Groove Burst (OMG Mode)")
         render_spiral_v4_1(data["amplitude"], data["pitch"], output=output)
     else:
-        print("🎨 Renderer: Standard (AI-Readable)")
+        print("Renderer: Standard (AI-Readable)")
         render_spiral(data["amplitude"], data["pitch"], output_path=output)
+        print(f"Output: {output}")
 
-        print(f"✅ Output: {output}")
-
-    # 🌉 MERSENNE BRIDGE — automatic cascade translation
-    from core.mersenne_bridge import MersenneBridge, save_cascade_packet
-    print(f"🌉 Running Mersenne Bridge...")
+    # p=13 Chain — Mersenne Bridge cascade
+    print("Running Mersenne Bridge...")
     bridge = MersenneBridge()
     packet = bridge.translate(
         data["amplitude"],
@@ -56,26 +58,29 @@ def run_file_mode(filepath, output=None, renderer="standard"):
     )
     cascade_output = output.replace(".png", "_cascade.json")
     save_cascade_packet(packet, cascade_output)
-    print(f"🔢 Dominant register: M{packet.dominant_exp} = {packet.dominant_prime}")
-    print(f"✨ Coherence events: {len(packet.coherence_events)}")
+    print(f"Dominant register: M{packet.dominant_exp} = {packet.dominant_prime}")
+    print(f"Coherence events: {len(packet.coherence_events)}")
     if packet.coherence_events:
-        print(f"🌟 First coherence at: {packet.coherence_events[0]}s")
+        print(f"First coherence at: {packet.coherence_events[0]}s")
+
 
 def run_live_mode(save_frames=False):
-    """Real-time microphone input → live spiral visualization."""
+    """Real-time microphone input -> live spiral visualization."""
     try:
         import sounddevice as sd
         import matplotlib.pyplot as plt
     except ImportError:
-        print("❌ Live mode requires: sounddevice, matplotlib")
-        print("   pip install sounddevice matplotlib")
+        print("Live mode requires: sounddevice, matplotlib")
+        print("  pip install sounddevice matplotlib")
         sys.exit(1)
 
-    from core.audio_processor import process_audio_frame
-    from core.spiral_renderer import setup_live_renderer, render_spiral_frame
+    # p=5 Content — process frame
+    from konomi.p5_content import process_audio_frame
+    # p=7 Connection — live renderer
+    from konomi.p7_connection import render_spiral_frame
 
-    print("🌀 SpiralSense — Live Mode")
-    print("🎤 Listening... (Ctrl+C to stop)")
+    print("SpiralSense v3.0 | Konomi Standard | Live Mode")
+    print("Listening... (Ctrl+C to stop)")
 
     import time
     import numpy as np
@@ -92,7 +97,7 @@ def run_live_mode(save_frames=False):
 
     def audio_callback(indata, frames, t, status):
         if status:
-            print(f"⚠️  Audio status: {status}")
+            print(f"Audio status: {status}")
         frame = indata[:, 0]
         features = process_audio_frame(frame, sample_rate)
         current_time = time.time() - start_time
@@ -100,24 +105,36 @@ def run_live_mode(save_frames=False):
         plt.pause(0.001)
         frame_count[0] += 1
         if frame_count[0] % 100 == 0:
-            print(f"   Frame {frame_count[0]} | Amp: {features['amplitude']:.3f} | Pitch: {features['pitch']:.1f}Hz")
+            print(f"  Frame {frame_count[0]} | Amp: {features['amplitude']:.3f} | "
+                  f"Pitch: {features['pitch']:.1f}Hz")
 
     try:
         with sd.InputStream(samplerate=sample_rate, blocksize=buffer_size,
                             channels=1, callback=audio_callback):
             plt.show(block=True)
     except KeyboardInterrupt:
-        print("\n🛑 SpiralSense stopped.")
+        print("\nSpiralSense stopped.")
+
+
+def run_boot():
+    """Boot all seven prime layers and report status."""
+    from konomi.p17_observer import boot_sequence
+    print("SpiralSense v3.0 | Konomi Standard | Boot Sequence")
+    print("=" * 50)
+    boot_sequence()
+    print("=" * 50)
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="🌀 SpiralSense — Sound as Light",
+        description="SpiralSense v3.0 — Konomi Symbeyond Standard",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
+fold(symbeyond) = 2 x 3 x 5 x 7 x 11 x 13 x 17 = 510,510
+
 Examples:
+  python spiralsense.py boot
   python spiralsense.py file music.wav
-  python spiralsense.py file music.wav --output output/my_spiral.png
   python spiralsense.py file music.wav --renderer grooveburst
   python spiralsense.py live
         """
@@ -125,9 +142,12 @@ Examples:
 
     subparsers = parser.add_subparsers(dest="mode", required=True)
 
+    # Boot mode
+    subparsers.add_parser("boot", help="Boot all seven prime layers")
+
     # File mode
     file_parser = subparsers.add_parser("file", help="Process audio file")
-    file_parser.add_argument("filepath", help="Path to audio file (wav, mp3, flac, etc.)")
+    file_parser.add_argument("filepath", help="Path to audio file")
     file_parser.add_argument("--output", "-o", help="Output PNG path", default=None)
     file_parser.add_argument("--renderer", "-r",
                              choices=["standard", "grooveburst"],
@@ -141,7 +161,9 @@ Examples:
 
     args = parser.parse_args()
 
-    if args.mode == "file":
+    if args.mode == "boot":
+        run_boot()
+    elif args.mode == "file":
         run_file_mode(args.filepath, args.output, args.renderer)
     elif args.mode == "live":
         run_live_mode(getattr(args, "save_frames", False))
