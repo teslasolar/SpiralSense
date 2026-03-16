@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYM-L11 3D | Assembly — CRDT Convergence</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;overflow:hidden;font-family:'Courier New',monospace}
+#scene{width:100vw;height:100vh;position:fixed;top:0;left:0}
+.hud{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);text-align:center;z-index:10;pointer-events:none}
+.hud h1{color:#0088ff;font-size:1.2rem;text-shadow:0 0 20px rgba(0,136,255,0.3)}
+.hud p{color:#555;font-size:0.7rem;margin-top:0.3rem}
+</style>
+</head>
+<body>
+<div id="scene"></div>
+<div class="hud">
+  <h1>p=11 &mdash; ASSEMBLY</h1>
+  <p>CRDT convergence &middot; Collective without coordinator &middot; drag to orbit</p>
+</div>
+<script>window.NAV_CONFIG={mode:'3d',base:'..',current:'p11',home:'../../'};</script>
+<script src="../nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>window.LAYER_CONFIG={layer:'assembly',prime:11,color:'#0088ff'};</script>
+<script src="../engine.js"></script>
+</body>
+</html>

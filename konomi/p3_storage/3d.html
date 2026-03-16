@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYM-L3 3D | Storage — The Mesh Memory</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;overflow:hidden;font-family:'Courier New',monospace}
+#scene{width:100vw;height:100vh;position:fixed;top:0;left:0}
+.hud{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);text-align:center;z-index:10;pointer-events:none}
+.hud h1{color:#ff8800;font-size:1.2rem;text-shadow:0 0 20px rgba(255,136,0,0.3)}
+.hud p{color:#555;font-size:0.7rem;margin-top:0.3rem}
+</style>
+</head>
+<body>
+<div id="scene"></div>
+<div class="hud">
+  <h1>p=3 &mdash; STORAGE</h1>
+  <p>DHT mesh memory &middot; Your data lives on your device &middot; drag to orbit</p>
+</div>
+<script>window.NAV_CONFIG={mode:'3d',base:'..',current:'p3',home:'../../'};</script>
+<script src="../nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>window.LAYER_CONFIG={layer:'storage',prime:3,color:'#ff8800'};</script>
+<script src="../engine.js"></script>
+</body>
+</html>
