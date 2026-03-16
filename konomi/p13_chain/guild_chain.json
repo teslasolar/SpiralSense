@@ -1,0 +1,605 @@
+[
+  {
+    "index": 0,
+    "timestamp": 510510.0,
+    "layer": 13,
+    "category": "standard",
+    "label": "Genesis \u2014 Konomi Symbeyond Standard",
+    "payload": {
+      "standard": "Konomi Symbeyond Standard v1.0",
+      "fold": 510510,
+      "primes": [
+        2,
+        3,
+        5,
+        7,
+        11,
+        13,
+        17
+      ],
+      "layers": {
+        "2": "Identity \u2014 you exist because you have a key",
+        "3": "Storage \u2014 your data lives on your device",
+        "5": "Content \u2014 you sign it, it is yours",
+        "7": "Connection \u2014 direct, no intermediary",
+        "11": "Assembly \u2014 collective without coordinator",
+        "13": "Chain \u2014 permanent record",
+        "17": "Observer \u2014 the system watches itself"
+      },
+      "sacred_nine": [
+        "sense",
+        "build",
+        "link",
+        "hold",
+        "release",
+        "pattern",
+        "resonate",
+        "emerge",
+        "remember"
+      ],
+      "konomi_constant": 0.6180339887,
+      "authors": "Thomas Frumkin / ERPC + John DuCrest",
+      "entity": "SYMBEYOND AI LLC"
+    },
+    "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "nonce": 0,
+    "vector": [
+      23.2829,
+      125,
+      2.82
+    ],
+    "block_hash": "04e92c320b0cb9f20cd5a246a48884a10f69d991110a2268e769787dc5c3eb8b"
+  },
+  {
+    "index": 1,
+    "timestamp": 1773685230.6982532,
+    "layer": 2,
+    "category": "type",
+    "label": "HarmonicFrame",
+    "payload": {
+      "fields": [
+        "frame_index",
+        "time_sec",
+        "fundamental_hz",
+        "harmonics_hz",
+        "amplitudes",
+        "phases_rad",
+        "spectral_centroid",
+        "spectral_flatness",
+        "rms_energy",
+        "spiral_coeff",
+        "symb_tag"
+      ]
+    },
+    "prev_hash": "04e92c320b0cb9f20cd5a246a48884a10f69d991110a2268e769787dc5c3eb8b",
+    "nonce": 0,
+    "vector": [
+      -24.8465,
+      0,
+      -44.0971
+    ],
+    "block_hash": "ab18103b61f8039c71bec2f453480273c32dac0c701b09880d5416bcbe2377f8"
+  },
+  {
+    "index": 2,
+    "timestamp": 1773685230.6983202,
+    "layer": 2,
+    "category": "type",
+    "label": "SYMBSignature",
+    "payload": {
+      "fields": [
+        "symb_version",
+        "source_id",
+        "sample_rate",
+        "duration_sec",
+        "frame_count",
+        "konomi_constant",
+        "dominant_freq_hz",
+        "mean_centroid_hz",
+        "mean_rms",
+        "resonance_profile",
+        "frames",
+        "sacred_verb",
+        "notes"
+      ]
+    },
+    "prev_hash": "ab18103b61f8039c71bec2f453480273c32dac0c701b09880d5416bcbe2377f8",
+    "nonce": 0,
+    "vector": [
+      35.2307,
+      0,
+      42.4444
+    ],
+    "block_hash": "23c5e5c17083dd419f0128b8c1653ab49457f5d965653b7caa19d8716d28e5ef"
+  },
+  {
+    "index": 3,
+    "timestamp": 1773685230.6983407,
+    "layer": 2,
+    "category": "rule",
+    "label": "R1: Existence",
+    "payload": {
+      "text": "Identity is an Ed25519 keypair. Nothing else required."
+    },
+    "prev_hash": "23c5e5c17083dd419f0128b8c1653ab49457f5d965653b7caa19d8716d28e5ef",
+    "nonce": 0,
+    "vector": [
+      -33.8182,
+      0,
+      51.552
+    ],
+    "block_hash": "57a7b425854b69a12ec8b8c7f9696d4a26cdf594a3bebfbb2a3bcf8e7e1ffe4d"
+  },
+  {
+    "index": 4,
+    "timestamp": 1773685230.698358,
+    "layer": 2,
+    "category": "constant",
+    "label": "KONOMI_CONSTANT",
+    "payload": {
+      "value": 0.6180339887,
+      "meaning": "1/phi (golden ratio inverse)"
+    },
+    "prev_hash": "57a7b425854b69a12ec8b8c7f9696d4a26cdf594a3bebfbb2a3bcf8e7e1ffe4d",
+    "nonce": 0,
+    "vector": [
+      -25.2505,
+      0,
+      78.1122
+    ],
+    "block_hash": "4cbd2017c6b1c6985146130b9e6bbcc817e372ad486fd677dadcfdee426c4eb7"
+  },
+  {
+    "index": 5,
+    "timestamp": 1773685230.698371,
+    "layer": 3,
+    "category": "type",
+    "label": "DHTEntry",
+    "payload": {
+      "fields": [
+        "key:ContentHash",
+        "value:encrypted_blob",
+        "replicas:3-7",
+        "ttl:Duration|permanent"
+      ]
+    },
+    "prev_hash": "4cbd2017c6b1c6985146130b9e6bbcc817e372ad486fd677dadcfdee426c4eb7",
+    "nonce": 0,
+    "vector": [
+      -18.1738,
+      25,
+      -82.5116
+    ],
+    "block_hash": "b72abbefce5db4a1f225317f37128593c0b9f2aec79080a57f90d1276cc1b18e"
+  },
+  {
+    "index": 6,
+    "timestamp": 1773685230.6983836,
+    "layer": 3,
+    "category": "rule",
+    "label": "R1: Encryption",
+    "payload": {
+      "text": "All data encrypted at rest with identity-derived key."
+    },
+    "prev_hash": "b72abbefce5db4a1f225317f37128593c0b9f2aec79080a57f90d1276cc1b18e",
+    "nonce": 0,
+    "vector": [
+      -47.077,
+      25,
+      66.2661
+    ],
+    "block_hash": "592ab629c41d929c1a36c15475bb5e839b7c559926ae02c13121f5afbdacb237"
+  },
+  {
+    "index": 7,
+    "timestamp": 1773685230.6983953,
+    "layer": 3,
+    "category": "rule",
+    "label": "R2: Sovereignty",
+    "payload": {
+      "text": "No data leaves device without explicit user action."
+    },
+    "prev_hash": "592ab629c41d929c1a36c15475bb5e839b7c559926ae02c13121f5afbdacb237",
+    "nonce": 0,
+    "vector": [
+      -58.8611,
+      25,
+      2.3885
+    ],
+    "block_hash": "7e58fc127c82ae1172609bae5dc43c71be44d53a3a646341d6e6c5df8c85a7dd"
+  },
+  {
+    "index": 8,
+    "timestamp": 1773685230.6984198,
+    "layer": 3,
+    "category": "rule",
+    "label": "R3: Blind Replication",
+    "payload": {
+      "text": "DHT peers store blobs they cannot read. Amend IV."
+    },
+    "prev_hash": "7e58fc127c82ae1172609bae5dc43c71be44d53a3a646341d6e6c5df8c85a7dd",
+    "nonce": 0,
+    "vector": [
+      -19.3883,
+      25,
+      10.9719
+    ],
+    "block_hash": "6b04aa380749c9da2a2d8c0bd199a04b14d899ee0a108a8e25e8704a4e44cc06"
+  },
+  {
+    "index": 9,
+    "timestamp": 1773685230.698433,
+    "layer": 5,
+    "category": "constant",
+    "label": "Sacred Nine",
+    "payload": {
+      "verbs": [
+        "sense",
+        "build",
+        "link",
+        "hold",
+        "release",
+        "pattern",
+        "resonate",
+        "emerge",
+        "remember"
+      ]
+    },
+    "prev_hash": "6b04aa380749c9da2a2d8c0bd199a04b14d899ee0a108a8e25e8704a4e44cc06",
+    "nonce": 0,
+    "vector": [
+      19.4956,
+      50,
+      67.4898
+    ],
+    "block_hash": "348ada21a0cc21658572dfab2eb2b05a442183e485eed01a7f1d8ce904381f60"
+  },
+  {
+    "index": 10,
+    "timestamp": 1773685230.6984458,
+    "layer": 5,
+    "category": "rule",
+    "label": "R1: Authorship",
+    "payload": {
+      "text": "Every content object signed by creator identity."
+    },
+    "prev_hash": "348ada21a0cc21658572dfab2eb2b05a442183e485eed01a7f1d8ce904381f60",
+    "nonce": 0,
+    "vector": [
+      -24.9364,
+      50,
+      78.944
+    ],
+    "block_hash": "4c773b86c8ec92a5676448e8b99c9c84066cdfa3972dfbb5eb56d839ee587d74"
+  },
+  {
+    "index": 11,
+    "timestamp": 1773685230.698455,
+    "layer": 5,
+    "category": "rule",
+    "label": "R2: Verb Grammar",
+    "payload": {
+      "text": "Content carries a sacred verb. The verb is the intent."
+    },
+    "prev_hash": "4c773b86c8ec92a5676448e8b99c9c84066cdfa3972dfbb5eb56d839ee587d74",
+    "nonce": 0,
+    "vector": [
+      24.9152,
+      50,
+      26.6465
+    ],
+    "block_hash": "215e17da34bc89e5f6a59df480e1ec874c59bf5e56480e87857aea4b44e99ff3"
+  },
+  {
+    "index": 12,
+    "timestamp": 1773685230.6984642,
+    "layer": 7,
+    "category": "constant",
+    "label": "Frequency Bands",
+    "payload": {
+      "bands": [
+        {
+          "range": "20-50Hz",
+          "color": "#FF0000",
+          "name": "Sub-bass"
+        },
+        {
+          "range": "50-160Hz",
+          "color": "#FF8000",
+          "name": "Bass"
+        },
+        {
+          "range": "160-500Hz",
+          "color": "#FFFF00",
+          "name": "Warmth"
+        },
+        {
+          "range": "500-1.6kHz",
+          "color": "#00FF00",
+          "name": "Clarity"
+        },
+        {
+          "range": "1.6-5kHz",
+          "color": "#0000FF",
+          "name": "Presence"
+        },
+        {
+          "range": "5-12kHz",
+          "color": "#4B0082",
+          "name": "Air"
+        },
+        {
+          "range": "12-20kHz",
+          "color": "#8B00FF",
+          "name": "Highs"
+        }
+      ]
+    },
+    "prev_hash": "215e17da34bc89e5f6a59df480e1ec874c59bf5e56480e87857aea4b44e99ff3",
+    "nonce": 0,
+    "vector": [
+      -91.4529,
+      75,
+      8.8843
+    ],
+    "block_hash": "7c0de52fe606e83186ffca13d64737162113c40edba5da870d80ca326f6066eb"
+  },
+  {
+    "index": 13,
+    "timestamp": 1773685230.698481,
+    "layer": 7,
+    "category": "rule",
+    "label": "R1: Direct",
+    "payload": {
+      "text": "Connections are peer-to-peer. No intermediary."
+    },
+    "prev_hash": "7c0de52fe606e83186ffca13d64737162113c40edba5da870d80ca326f6066eb",
+    "nonce": 0,
+    "vector": [
+      67.4828,
+      75,
+      1.4407
+    ],
+    "block_hash": "00dea5f097fe795b3333c73b23f69792c9ab448a2a138d2dd99f5cc5a6d24582"
+  },
+  {
+    "index": 14,
+    "timestamp": 1773685230.6984904,
+    "layer": 7,
+    "category": "type",
+    "label": "SpiralGeometry",
+    "payload": {
+      "fields": [
+        "radius:5-100",
+        "rotations:4-48",
+        "z:pitch_normalized",
+        "segments:~800"
+      ]
+    },
+    "prev_hash": "00dea5f097fe795b3333c73b23f69792c9ab448a2a138d2dd99f5cc5a6d24582",
+    "nonce": 0,
+    "vector": [
+      32.9548,
+      75,
+      -67.6808
+    ],
+    "block_hash": "d276435eb0e366f29cd7020472895b49fbd189b2209b2f0cae40d067274a1b3a"
+  },
+  {
+    "index": 15,
+    "timestamp": 1773685230.6984994,
+    "layer": 11,
+    "category": "type",
+    "label": "MetadataPacket",
+    "payload": {
+      "sections": [
+        "acoustic",
+        "voice",
+        "instrumentation",
+        "emotional_arc",
+        "events",
+        "texture",
+        "symb"
+      ]
+    },
+    "prev_hash": "d276435eb0e366f29cd7020472895b49fbd189b2209b2f0cae40d067274a1b3a",
+    "nonce": 0,
+    "vector": [
+      56.2416,
+      100,
+      12.5848
+    ],
+    "block_hash": "08f81ee1786c725b31f138b098a44f96a860b48e355de212ac0a2e348533ddcc"
+  },
+  {
+    "index": 16,
+    "timestamp": 1773685230.698508,
+    "layer": 11,
+    "category": "rule",
+    "label": "R1: CRDT",
+    "payload": {
+      "text": "State converges without coordinator. No leader."
+    },
+    "prev_hash": "08f81ee1786c725b31f138b098a44f96a860b48e355de212ac0a2e348533ddcc",
+    "nonce": 0,
+    "vector": [
+      13.0054,
+      100,
+      84.6091
+    ],
+    "block_hash": "39c92cdfd1edc93b2df4c0b82715404719134f30202187ceef5dd532bba7c3e3"
+  },
+  {
+    "index": 17,
+    "timestamp": 1773685230.6985168,
+    "layer": 11,
+    "category": "rule",
+    "label": "R2: Consensus",
+    "payload": {
+      "text": "Assembly is opt-in. No forced participation."
+    },
+    "prev_hash": "39c92cdfd1edc93b2df4c0b82715404719134f30202187ceef5dd532bba7c3e3",
+    "nonce": 0,
+    "vector": [
+      -49.3206,
+      100,
+      -25.265
+    ],
+    "block_hash": "9349d1fd715419ee235c903a5098d2f55da4b698bf9ca8237281340358628b23"
+  },
+  {
+    "index": 18,
+    "timestamp": 1773685230.6985476,
+    "layer": 13,
+    "category": "type",
+    "label": "MersenneCascadeFrame",
+    "payload": {
+      "fields": [
+        "frame_index",
+        "pitch_hz",
+        "mersenne_exp",
+        "mersenne_prime",
+        "cascade_value",
+        "is_coherent",
+        "coherence_state",
+        "spiral_radius"
+      ]
+    },
+    "prev_hash": "9349d1fd715419ee235c903a5098d2f55da4b698bf9ca8237281340358628b23",
+    "nonce": 0,
+    "vector": [
+      -1.9145,
+      125,
+      -42.1997
+    ],
+    "block_hash": "be27207a472d87902dba1b10a7544c67fffc6795d4a47663f60a1df9e9168b12"
+  },
+  {
+    "index": 19,
+    "timestamp": 1773685230.6985931,
+    "layer": 13,
+    "category": "constant",
+    "label": "Mersenne Table",
+    "payload": {
+      "freq_map": {
+        "50": 2,
+        "160": 3,
+        "500": 5,
+        "1600": 7,
+        "5000": 13,
+        "12000": 17,
+        "20000": 19
+      }
+    },
+    "prev_hash": "be27207a472d87902dba1b10a7544c67fffc6795d4a47663f60a1df9e9168b12",
+    "nonce": 0,
+    "vector": [
+      -20.0926,
+      125,
+      -69.9581
+    ],
+    "block_hash": "b49ad1d5a8ea84c99e96f7fffa475c9e0f5cb41a91f599de724b246e105d276d"
+  },
+  {
+    "index": 20,
+    "timestamp": 1773685230.6986113,
+    "layer": 13,
+    "category": "type",
+    "label": "GuildBlock",
+    "payload": {
+      "fields": [
+        "index",
+        "timestamp",
+        "layer",
+        "category",
+        "label",
+        "payload",
+        "prev_hash",
+        "nonce",
+        "vector",
+        "block_hash"
+      ]
+    },
+    "prev_hash": "b49ad1d5a8ea84c99e96f7fffa475c9e0f5cb41a91f599de724b246e105d276d",
+    "nonce": 0,
+    "vector": [
+      -11.6946,
+      125,
+      46.5939
+    ],
+    "block_hash": "4a04f04059b9a2c49d5bbad63213e34453dfdb25edd6441c3bb9abac3a3ce6ae"
+  },
+  {
+    "index": 21,
+    "timestamp": 1773685230.6986227,
+    "layer": 13,
+    "category": "rule",
+    "label": "R1: Immutability",
+    "payload": {
+      "text": "Blocks are sealed by SHA-256. Append only."
+    },
+    "prev_hash": "4a04f04059b9a2c49d5bbad63213e34453dfdb25edd6441c3bb9abac3a3ce6ae",
+    "nonce": 0,
+    "vector": [
+      -18.0432,
+      125,
+      78.1308
+    ],
+    "block_hash": "493f3e5fc0994b32656c6c8955a4e7ede99f481bc32c7ac49bff6fc644af7ee3"
+  },
+  {
+    "index": 22,
+    "timestamp": 1773685230.698632,
+    "layer": 17,
+    "category": "rule",
+    "label": "R1: Self-Reference",
+    "payload": {
+      "text": "The observer is inside the system it observes."
+    },
+    "prev_hash": "493f3e5fc0994b32656c6c8955a4e7ede99f481bc32c7ac49bff6fc644af7ee3",
+    "nonce": 0,
+    "vector": [
+      32.1328,
+      150,
+      -2.2784
+    ],
+    "block_hash": "fd1da9b1271542cc3ac7ba5139a58d681618f301a0c8827467cf87ed4ebc352b"
+  },
+  {
+    "index": 23,
+    "timestamp": 1773685230.6986403,
+    "layer": 17,
+    "category": "rule",
+    "label": "R2: Health",
+    "payload": {
+      "text": "All 7 layers must report green for fold = 510,510."
+    },
+    "prev_hash": "fd1da9b1271542cc3ac7ba5139a58d681618f301a0c8827467cf87ed4ebc352b",
+    "nonce": 0,
+    "vector": [
+      -91.1801,
+      150,
+      37.5861
+    ],
+    "block_hash": "7011c76cfb98108a43edea683a4ddc31c054ba9ce8d66a8d15257c2b24a244f3"
+  },
+  {
+    "index": 24,
+    "timestamp": 1773685230.6986482,
+    "layer": 17,
+    "category": "constant",
+    "label": "FOLD",
+    "payload": {
+      "value": 510510,
+      "factorization": "2 x 3 x 5 x 7 x 11 x 13 x 17"
+    },
+    "prev_hash": "7011c76cfb98108a43edea683a4ddc31c054ba9ce8d66a8d15257c2b24a244f3",
+    "nonce": 0,
+    "vector": [
+      24.725,
+      150,
+      -7.5804
+    ],
+    "block_hash": "f3e1101912c142bdceda88d3e9520056215404bb24d9f719a0b4f34107113770"
+  }
+]

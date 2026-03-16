@@ -301,6 +301,54 @@
     l2.position.set(60, -35, 0);
     group.add(l2);
     group.add(buildParticles(300, 200, '#8844ff'));
+  } else if (CFG.layer === 'guild_chain') {
+    // Guild Chain — load chain data and render blocks in 3D vector space
+    const LAYER_COLORS = {
+      2: '#ff4444', 3: '#ff8800', 5: '#ffdd00', 7: '#00cc44',
+      11: '#0088ff', 13: '#8844ff', 17: '#ff44cc',
+    };
+    const chainData = window.CHAIN_DATA || [];
+    const prevPositions = [];
+
+    chainData.forEach((block, idx) => {
+      const v = block.vector || [0, 0, 0];
+      const col = LAYER_COLORS[block.layer] || '#00ffaa';
+      const size = block.index === 0 ? 6 : 3;
+
+      // Block node
+      group.add(buildNode(v[0], v[1], v[2], col, size));
+
+      // Label
+      const shortLabel = block.label.length > 20 ? block.label.substring(0, 20) : block.label;
+      const lbl = makeLabel('[' + block.index + '] ' + shortLabel, col, 10);
+      lbl.position.set(v[0], v[1] + size + 3, v[2]);
+      group.add(lbl);
+
+      // Chain link to previous block
+      if (prevPositions.length > 0) {
+        const prev = prevPositions[prevPositions.length - 1];
+        const geo = new THREE.BufferGeometry().setFromPoints([
+          new THREE.Vector3(prev[0], prev[1], prev[2]),
+          new THREE.Vector3(v[0], v[1], v[2])
+        ]);
+        const linkMat = new THREE.LineBasicMaterial({
+          color: new THREE.Color(col), transparent: true, opacity: 0.35
+        });
+        group.add(new THREE.Line(geo, linkMat));
+      }
+      prevPositions.push(v);
+    });
+
+    // Layer rings at each Y level
+    [0, 25, 50, 75, 100, 125, 150].forEach((y, i) => {
+      const primeColors = ['#ff4444', '#ff8800', '#ffdd00', '#00cc44', '#0088ff', '#8844ff', '#ff44cc'];
+      group.add(buildRing(90, primeColors[i], y));
+    });
+
+    const title = makeLabel('Guild Chain — ' + chainData.length + ' blocks', '#00ffaa', 25);
+    title.position.set(0, 170, 0);
+    group.add(title);
+    group.add(buildParticles(300, 250, '#8844ff'));
   }
 
   // Ambient light (for any mesh materials)
