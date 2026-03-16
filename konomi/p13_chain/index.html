@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYM-L13 | p=13 | Chain — The Ledger</title>
+<style>
+:root { --prime: #8844ff; --bg: #0a0a0f; --fg: #e0e0e0; --dim: #555; --card-bg: #12121a; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Courier New',monospace; background:var(--bg); color:var(--fg); min-height:100vh; }
+.back { display:inline-block; padding:1rem; color:var(--dim); text-decoration:none; font-size:0.8rem; }
+.back:hover { color:var(--fg); }
+header { text-align:center; padding:2rem 1rem; border-bottom:1px solid #222; }
+header .p { font-size:4rem; color:var(--prime); opacity:0.2; }
+header h1 { font-size:1.4rem; color:var(--prime); }
+header .scope { color:var(--dim); font-size:0.8rem; margin-top:0.5rem; }
+.philosophy { max-width:600px; margin:2rem auto; padding:0 1rem; text-align:center; font-size:0.85rem; color:var(--dim); line-height:1.8; font-style:italic; }
+.files { max-width:700px; margin:0 auto 2rem; padding:0 1rem; }
+.file { background:var(--card-bg); border-left:3px solid var(--prime); padding:1rem 1.2rem; margin-bottom:1px; }
+.file h3 { font-size:0.85rem; color:var(--prime); margin-bottom:0.3rem; }
+.file p { font-size:0.72rem; color:var(--dim); line-height:1.6; }
+.file .lines { font-size:0.65rem; color:#333; float:right; }
+.agents { max-width:700px; margin:0 auto 2rem; padding:0 1rem; }
+.agents h3 { color:var(--dim); font-size:0.75rem; letter-spacing:0.1em; margin-bottom:0.8rem; text-align:center; }
+.agent { display:flex; align-items:center; padding:0.35rem 0; font-size:0.72rem; border-bottom:1px solid #1a1a22; }
+.agent .coord { color:var(--prime); width:110px; }
+.agent .role { color:var(--fg); }
+.chains { max-width:700px; margin:0 auto 2rem; padding:0 1rem; display:grid; grid-template-columns:1fr 1fr; gap:1px; }
+.chain-box { background:var(--card-bg); padding:1rem; border-left:3px solid var(--prime); }
+.chain-box h4 { font-size:0.8rem; color:var(--prime); margin-bottom:0.5rem; }
+.chain-box p { font-size:0.68rem; color:var(--dim); line-height:1.7; }
+.mersenne { max-width:700px; margin:0 auto 2rem; padding:0 1rem; text-align:center; font-size:0.72rem; color:var(--dim); }
+.mersenne code { color:var(--prime); background:var(--card-bg); padding:0.2rem 0.5rem; border-radius:3px; }
+footer { text-align:center; padding:2rem; font-size:0.7rem; color:var(--dim); border-top:1px solid #222; }
+</style>
+</head>
+<body>
+<a href="../" class="back">&larr; fold(symbeyond) = 510,510</a>
+
+<header>
+  <div class="p">13</div>
+  <h1>SYM-L13 &mdash; Chain</h1>
+  <div class="scope">Dual-layer blockchain for permanent records</div>
+</header>
+
+<div class="philosophy">
+  "Where KCC meets Symbeyond. Stores proof that things happened &mdash;<br>
+  not the things themselves. Audio becomes mathematics. Sound becomes primality."
+</div>
+
+<div class="files">
+  <div class="file">
+    <span class="lines">41 lines</span>
+    <h3>mersenne_table.py</h3>
+    <p>Mersenne prime table (M<sub>p</sub> = 2<sup>p</sup> - 1). Frequency-to-exponent mapping. Sacred Nine verb-to-coherence color states. pitch_to_mersenne_exp().</p>
+  </div>
+  <div class="file">
+    <span class="lines">34 lines</span>
+    <h3>lucas_lehmer.py</h3>
+    <p>Lucas-Lehmer core: S<sub>k</sub> = S<sub>k-1</sub>&sup2; - 2 (mod M<sub>p</sub>). Seed derivation from pitch. Coherence proximity measurement. Spiral radius computation.</p>
+  </div>
+  <div class="file">
+    <span class="lines">40 lines</span>
+    <h3>cascade.py</h3>
+    <p>MersenneCascadeFrame (single frame's cascade parameters) and MersenneCascadePacket (full audio translation). The bridge output data types.</p>
+  </div>
+  <div class="file">
+    <span class="lines">75 lines</span>
+    <h3>bridge.py</h3>
+    <p>MersenneBridge class. Translates SpiralSense audio into Lucas-Lehmer cascades. Per-exponent state tracking. Amplitude-driven iteration stepping. Coherence event detection.</p>
+  </div>
+  <div class="file">
+    <span class="lines">20 lines</span>
+    <h3>io.py</h3>
+    <p>Save and load cascade packets. JSON serialization for Thomas's visualizer.</p>
+  </div>
+</div>
+
+<div class="chains">
+  <div class="chain-box">
+    <h4>L1 &mdash; Authority Chain</h4>
+    <p>
+      Consensus: Proof of Authority (PoA)<br>
+      Validators: 5-11 elected nodes<br>
+      Block time: 60 seconds<br>
+      Block size: 1 MB (15:1 hash ratio)<br>
+      Finality: 1 block (2/3 consensus)<br>
+      Hardware: Raspberry Pi 4 ($35)
+    </p>
+  </div>
+  <div class="chain-box">
+    <h4>L2 &mdash; Operations Chain</h4>
+    <p>
+      Consensus: Delegated Proof of Stake<br>
+      Validators: 100+ SYM stakers<br>
+      Block time: 5 seconds<br>
+      Throughput: 1,000 TPS<br>
+      Finality: 2 blocks (10 sec)<br>
+      Checkpoint: 50 L2 &rarr; 1 L1
+    </p>
+  </div>
+</div>
+
+<div class="agents">
+  <h3>CUBE AGENT REMAPPING</h3>
+  <div class="agent"><span class="coord">[0,0,0]</span><span class="role">IDENTITY AGENT &mdash; keypair lifecycle</span></div>
+  <div class="agent"><span class="coord">[999,0,0]</span><span class="role">CONTENT AGENT &mdash; bloom verification</span></div>
+  <div class="agent"><span class="coord">[999,999,0]</span><span class="role">MESH AGENT &mdash; peer topology</span></div>
+  <div class="agent"><span class="coord">[0,999,0]</span><span class="role">RIGHTS AGENT &mdash; legal rule enforcement</span></div>
+  <div class="agent"><span class="coord">[0,0,999]</span><span class="role">AUDIT AGENT &mdash; evidence archive</span></div>
+  <div class="agent"><span class="coord">[999,0,999]</span><span class="role">ASSEMBLY AGENT &mdash; room/collective state</span></div>
+  <div class="agent"><span class="coord">[999,999,999]</span><span class="role">SYSTEM: RESOURCE MANAGER</span></div>
+  <div class="agent"><span class="coord">[0,999,999]</span><span class="role">SYSTEM: SELF-HEALING</span></div>
+</div>
+
+<div class="mersenne">
+  Pitch &rarr; Mersenne mapping:
+  <code>50Hz &rarr; M2=3</code>
+  <code>160Hz &rarr; M3=7</code>
+  <code>500Hz &rarr; M5=31</code>
+  <code>1.6kHz &rarr; M7=127</code>
+  <code>5kHz &rarr; M13=8191</code>
+  <code>12kHz &rarr; M17=131071</code>
+  <code>20kHz &rarr; M19=524287</code>
+</div>
+
+<footer>
+  512 operation slots. Each sub-cube is a container for one active operation.<br>
+  Self-healing: detects rights violations, censorship attempts, topology manipulation.
+</footer>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYM-L17 | p=17 | Observer — The Observer</title>
+<style>
+:root { --prime: #ff44cc; --bg: #0a0a0f; --fg: #e0e0e0; --dim: #555; --card-bg: #12121a; --accent: #00ffaa; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Courier New',monospace; background:var(--bg); color:var(--fg); min-height:100vh; }
+.back { display:inline-block; padding:1rem; color:var(--dim); text-decoration:none; font-size:0.8rem; }
+.back:hover { color:var(--fg); }
+header { text-align:center; padding:2rem 1rem; border-bottom:1px solid #222; }
+header .p { font-size:4rem; color:var(--prime); opacity:0.2; }
+header h1 { font-size:1.4rem; color:var(--prime); }
+header .scope { color:var(--dim); font-size:0.8rem; margin-top:0.5rem; }
+.philosophy { max-width:600px; margin:2rem auto; padding:0 1rem; text-align:center; font-size:0.85rem; color:var(--dim); line-height:1.8; font-style:italic; }
+.files { max-width:700px; margin:0 auto 2rem; padding:0 1rem; }
+.file { background:var(--card-bg); border-left:3px solid var(--prime); padding:1rem 1.2rem; margin-bottom:1px; }
+.file h3 { font-size:0.85rem; color:var(--prime); margin-bottom:0.3rem; }
+.file p { font-size:0.72rem; color:var(--dim); line-height:1.6; }
+.file .lines { font-size:0.65rem; color:#333; float:right; }
+
+/* Live boot display */
+.boot-display {
+  max-width:500px; margin:2rem auto; padding:1.5rem;
+  background:var(--card-bg); border:1px solid #222; border-radius:8px;
+}
+.boot-display h3 { color:var(--dim); font-size:0.75rem; letter-spacing:0.1em; margin-bottom:1rem; text-align:center; }
+.boot-line {
+  display:flex; align-items:center; padding:0.4rem 0;
+  font-size:0.8rem; border-bottom:1px solid #1a1a22;
+}
+.boot-line .led {
+  width:10px; height:10px; border-radius:50%;
+  margin-right:0.8rem; flex-shrink:0;
+}
+.boot-line .layer { flex:1; }
+.boot-line .status { color:var(--accent); font-size:0.7rem; }
+.boot-line:nth-child(2) .led { background:#ff4444; }
+.boot-line:nth-child(3) .led { background:#ff8800; }
+.boot-line:nth-child(4) .led { background:#ffdd00; }
+.boot-line:nth-child(5) .led { background:#00cc44; }
+.boot-line:nth-child(6) .led { background:#0088ff; }
+.boot-line:nth-child(7) .led { background:#8844ff; }
+.boot-line:nth-child(8) .led { background:#ff44cc; }
+.fold-result {
+  text-align:center; margin-top:1rem; padding-top:1rem;
+  border-top:1px solid #222; color:var(--accent); font-size:0.85rem;
+}
+
+.health { max-width:700px; margin:0 auto 2rem; padding:0 1rem; }
+.health h3 { color:var(--dim); font-size:0.75rem; letter-spacing:0.1em; margin-bottom:0.8rem; text-align:center; }
+.health pre { background:var(--card-bg); padding:1rem; font-size:0.72rem; line-height:1.7; overflow-x:auto; border-left:3px solid var(--prime); color:var(--fg); }
+
+.recursion {
+  max-width:600px; margin:0 auto 2rem; padding:0 1rem;
+  text-align:center; font-size:0.8rem; color:var(--dim); line-height:2;
+}
+.recursion strong { color:var(--prime); }
+
+footer { text-align:center; padding:2rem; font-size:0.7rem; color:var(--dim); border-top:1px solid #222; }
+footer .sig { color:var(--accent); font-size:1rem; margin-top:0.5rem; }
+</style>
+</head>
+<body>
+<a href="../" class="back">&larr; fold(symbeyond) = 510,510</a>
+
+<header>
+  <div class="p">17</div>
+  <h1>SYM-L17 &mdash; Observer</h1>
+  <div class="scope">System self-observation, health monitoring, deployment</div>
+</header>
+
+<div class="philosophy">
+  "p=17 observes p=2 through p=13. But p=17 is itself observed by the user &mdash;<br>
+  who is a node &mdash; who is running p=2 through p=17.<br>
+  The observer is inside the system it observes."
+</div>
+
+<div class="files">
+  <div class="file">
+    <span class="lines">36 lines</span>
+    <h3>boot.py</h3>
+    <p>Boot sequence. Imports each prime layer in order [p=2, p=3, p=5, p=7, p=11, p=13, p=17]. Each phase stabilizes before the next. Halts at highest successful phase.</p>
+  </div>
+  <div class="file">
+    <span class="lines">31 lines</span>
+    <h3>health.py</h3>
+    <p>Health metrics. Reports fold value, prime list, version, and per-layer import status (green/red). The observer watches the system from within.</p>
+  </div>
+</div>
+
+<div class="boot-display">
+  <h3>BOOT SEQUENCE</h3>
+  <div class="boot-line"><div class="led"></div><div class="layer">p=2&ensp; Identity</div><div class="status">[OK]</div></div>
+  <div class="boot-line"><div class="led"></div><div class="layer">p=3&ensp; Storage</div><div class="status">[OK]</div></div>
+  <div class="boot-line"><div class="led"></div><div class="layer">p=5&ensp; Content</div><div class="status">[OK]</div></div>
+  <div class="boot-line"><div class="led"></div><div class="layer">p=7&ensp; Connection</div><div class="status">[OK]</div></div>
+  <div class="boot-line"><div class="led"></div><div class="layer">p=11 Assembly</div><div class="status">[OK]</div></div>
+  <div class="boot-line"><div class="led"></div><div class="layer">p=13 Chain</div><div class="status">[OK]</div></div>
+  <div class="boot-line"><div class="led"></div><div class="layer">p=17 Observer</div><div class="status">[OK]</div></div>
+  <div class="fold-result">fold = 510,510 &mdash; ALL PRIMES GREEN</div>
+</div>
+
+<div class="health">
+  <h3>HEALTH METRICS</h3>
+  <pre>UDT:BootSequence
+  order : [p=2, p=3, p=5, p=7, p=11, p=13, p=17]
+  rule  : each phase stabilizes before the next
+  fail  : halts at highest successful phase
+  test  : all seven primes green = operational
+
+UDT:HealthMetrics
+  peer_count          : int
+  bloom_throughput     : blooms/second
+  crdt_convergence_ms : Duration
+  chain_sync_lag      : blocks
+  mesh_connectivity   : float (0-1)</pre>
+</div>
+
+<div class="recursion">
+  <strong>The Recursion</strong><br>
+  fold(node) = fold(network) = fold(network of networks) = 510,510<br>
+  The prime decomposition is identical at every scale.<br>
+  This is what makes the architecture recursive rather than merely distributed.<br><br>
+  Every Symbeyond node runs on a Raspberry Pi ($35) or any modern browser.<br>
+  Decentralization is not a philosophy &mdash; it is a hardware specification.
+</div>
+
+<footer>
+  STD &rarr; UDT &rarr; ENTITY &rarr; RELATION &rarr; RULE &rarr; CROSSWALK &rarr; STD<br>
+  The standard defines how to extend itself. The architecture is the governance.<br>
+  <div class="sig">Start with p=2. Generate a keypair. You exist. 510,510</div>
+</footer>
+</body>
+</html>

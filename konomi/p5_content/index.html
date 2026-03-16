@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYM-L5 | p=5 | Content — The Gate</title>
+<style>
+:root { --prime: #ffdd00; --bg: #0a0a0f; --fg: #e0e0e0; --dim: #555; --card-bg: #12121a; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Courier New',monospace; background:var(--bg); color:var(--fg); min-height:100vh; }
+.back { display:inline-block; padding:1rem; color:var(--dim); text-decoration:none; font-size:0.8rem; }
+.back:hover { color:var(--fg); }
+header { text-align:center; padding:2rem 1rem; border-bottom:1px solid #222; }
+header .p { font-size:4rem; color:var(--prime); opacity:0.2; }
+header h1 { font-size:1.4rem; color:var(--prime); }
+header .scope { color:var(--dim); font-size:0.8rem; margin-top:0.5rem; }
+.philosophy { max-width:600px; margin:2rem auto; padding:0 1rem; text-align:center; font-size:0.85rem; color:var(--dim); line-height:1.8; font-style:italic; }
+.files { max-width:700px; margin:0 auto 2rem; padding:0 1rem; }
+.file { background:var(--card-bg); border-left:3px solid var(--prime); padding:1rem 1.2rem; margin-bottom:1px; }
+.file h3 { font-size:0.85rem; color:var(--prime); margin-bottom:0.3rem; }
+.file p { font-size:0.72rem; color:var(--dim); line-height:1.6; }
+.file .lines { font-size:0.65rem; color:#333; float:right; }
+.verbs { max-width:700px; margin:0 auto 2rem; padding:0 1rem; text-align:center; }
+.verbs h3 { color:var(--dim); font-size:0.75rem; letter-spacing:0.1em; margin-bottom:1rem; }
+.verb { display:inline-block; background:var(--card-bg); padding:0.4rem 0.8rem; margin:0.2rem; border-radius:4px; font-size:0.75rem; color:var(--prime); }
+.rules { max-width:700px; margin:0 auto 2rem; padding:0 1rem; font-size:0.72rem; color:var(--dim); line-height:2; }
+.rules strong { color:var(--fg); }
+.udt { max-width:700px; margin:0 auto 2rem; padding:0 1rem; }
+.udt h3 { color:var(--dim); font-size:0.75rem; letter-spacing:0.1em; margin-bottom:0.8rem; text-align:center; }
+.udt pre { background:var(--card-bg); padding:1rem; font-size:0.72rem; line-height:1.7; overflow-x:auto; border-left:3px solid var(--prime); color:var(--fg); }
+footer { text-align:center; padding:2rem; font-size:0.7rem; color:var(--dim); border-top:1px solid #222; }
+</style>
+</head>
+<body>
+<a href="../" class="back">&larr; fold(symbeyond) = 510,510</a>
+
+<header>
+  <div class="p">5</div>
+  <h1>SYM-L5 &mdash; Content</h1>
+  <div class="scope">Content creation, signing, and sovereignty</div>
+</header>
+
+<div class="philosophy">
+  "The feed is a deterministic function of who you follow.<br>
+  No algorithm ranks, filters, suppresses, or amplifies."
+</div>
+
+<div class="files">
+  <div class="file">
+    <span class="lines">55 lines</span>
+    <h3>processor.py</h3>
+    <p>AudioProcessor core class. FFT-based harmonic extraction engine. Converts raw waveforms into SYMBSignature objects with &kappa;-weighted resonance coefficients.</p>
+  </div>
+  <div class="file">
+    <span class="lines">60 lines</span>
+    <h3>extraction.py</h3>
+    <p>Frame-by-frame FFT analysis. Windowed chunk extraction, harmonic partial tracking, spectral centroid/flatness, RMS energy, spiral coefficient computation.</p>
+  </div>
+  <div class="file">
+    <span class="lines">35 lines</span>
+    <h3>sacred_verb.py</h3>
+    <p>Sacred Nine verb assignment. Maps signal characteristics (RMS, frequency, centroid) to one of nine verbs. Also derives verb from pitch register.</p>
+  </div>
+  <div class="file">
+    <span class="lines">42 lines</span>
+    <h3>bridge_api.py</h3>
+    <p>Legacy-compatible entry points. process_audio() for file mode, process_audio_frame() for live mode. Maintains original dict contract.</p>
+  </div>
+  <div class="file">
+    <span class="lines">49 lines</span>
+    <h3>legacy.py</h3>
+    <p>Waveform-to-legacy-dict converter. RMS amplitude array, YIN pitch estimation, SYMB harmonic fingerprint layer.</p>
+  </div>
+</div>
+
+<div class="verbs">
+  <h3>SACRED NINE VERBS</h3>
+  <span class="verb">sense</span>
+  <span class="verb">build</span>
+  <span class="verb">link</span>
+  <span class="verb">hold</span>
+  <span class="verb">release</span>
+  <span class="verb">pattern</span>
+  <span class="verb">resonate</span>
+  <span class="verb">emerge</span>
+  <span class="verb">remember</span>
+</div>
+
+<div class="udt">
+  <h3>UDT DEFINITIONS</h3>
+  <pre>UDT:SignedBloom extends Bloom
+  verified   : bool
+  propagated : [peer_id]
+
+UDT:ContentFeed
+  follows    : [KeyPair.public_key]
+  blooms     : [SignedBloom]    — chronological, no algorithm
+  filter     : user-defined     — mute lists, keyword blocks</pre>
+</div>
+
+<div class="rules">
+  <strong>R1:</strong> Content is signed. Authorship is provable. &mdash; U.S. Const. amend. I<br>
+  <strong>R2:</strong> Each user moderates their own feed independently. &mdash; 47 U.S.C. &sect; 230(c)(2)(A)<br>
+  <strong>R3:</strong> No algorithmic amplification or suppression. &mdash; 47 U.S.C. &sect; 230(b)(3)
+</div>
+
+<footer>
+  The Gate. Every bloom is signed by its author's private key<br>
+  and identified by its SHA-256 hash. Tampering is detectable.
+</footer>
+</body>
+</html>

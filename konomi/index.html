@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Konomi Symbeyond Standard — SpiralSense</title>
+<style>
+:root {
+  --bg: #0a0a0f;
+  --fg: #e0e0e0;
+  --accent: #00ffaa;
+  --dim: #555;
+  --p2: #ff4444;
+  --p3: #ff8800;
+  --p5: #ffdd00;
+  --p7: #00cc44;
+  --p11: #0088ff;
+  --p13: #8844ff;
+  --p17: #ff44cc;
+  --card-bg: #12121a;
+  --border: #222;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Courier New', monospace;
+  background: var(--bg);
+  color: var(--fg);
+  min-height: 100vh;
+}
+header {
+  text-align: center;
+  padding: 3rem 1rem 2rem;
+  border-bottom: 1px solid var(--border);
+}
+header h1 {
+  font-size: 1.6rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+header .fold {
+  font-size: 2.2rem;
+  color: var(--accent);
+  margin: 1rem 0;
+  font-weight: bold;
+}
+header .fold span {
+  opacity: 0.4;
+}
+header .subtitle {
+  color: var(--dim);
+  font-size: 0.85rem;
+  max-width: 640px;
+  margin: 0.5rem auto;
+  line-height: 1.6;
+}
+.authors {
+  color: var(--dim);
+  font-size: 0.75rem;
+  margin-top: 1rem;
+}
+.authors strong { color: var(--fg); }
+
+/* Spiral visualization */
+.spiral-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+canvas#spiralCanvas {
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Prime grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
+}
+.card {
+  background: var(--card-bg);
+  border-left: 3px solid var(--dim);
+  padding: 1.5rem;
+  transition: all 0.2s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.card:hover {
+  background: #1a1a28;
+  transform: translateX(4px);
+}
+.card .prime {
+  font-size: 2rem;
+  font-weight: bold;
+  float: right;
+  opacity: 0.15;
+}
+.card h2 {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+.card .scope {
+  font-size: 0.75rem;
+  color: var(--dim);
+  margin-bottom: 0.8rem;
+}
+.card .files {
+  font-size: 0.7rem;
+  color: var(--dim);
+  line-height: 1.8;
+}
+.card .files code {
+  background: #1e1e2a;
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+  color: var(--fg);
+  font-size: 0.7rem;
+}
+.card.p2  { border-color: var(--p2); }
+.card.p2  h2 { color: var(--p2); }
+.card.p3  { border-color: var(--p3); }
+.card.p3  h2 { color: var(--p3); }
+.card.p5  { border-color: var(--p5); }
+.card.p5  h2 { color: var(--p5); }
+.card.p7  { border-color: var(--p7); }
+.card.p7  h2 { color: var(--p7); }
+.card.p11 { border-color: var(--p11); }
+.card.p11 h2 { color: var(--p11); }
+.card.p13 { border-color: var(--p13); }
+.card.p13 h2 { color: var(--p13); }
+.card.p17 { border-color: var(--p17); }
+.card.p17 h2 { color: var(--p17); }
+
+/* Boot status */
+.boot {
+  text-align: center;
+  padding: 2rem 1rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+.boot h3 { color: var(--dim); font-size: 0.8rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
+.boot-leds {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+.led {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+.led.p2  { background: var(--p2); animation-delay: 0s; }
+.led.p3  { background: var(--p3); animation-delay: 0.15s; }
+.led.p5  { background: var(--p5); animation-delay: 0.3s; }
+.led.p7  { background: var(--p7); animation-delay: 0.45s; }
+.led.p11 { background: var(--p11); animation-delay: 0.6s; }
+.led.p13 { background: var(--p13); animation-delay: 0.75s; }
+.led.p17 { background: var(--p17); animation-delay: 0.9s; }
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; box-shadow: none; }
+  50% { opacity: 1; box-shadow: 0 0 12px currentColor; }
+}
+.boot-status {
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  color: var(--accent);
+}
+
+/* Crosswalk section */
+.crosswalk {
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  padding: 0 1rem;
+}
+.crosswalk h3 {
+  color: var(--dim);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.crosswalk table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.72rem;
+}
+.crosswalk td, .crosswalk th {
+  padding: 0.4rem 0.6rem;
+  border-bottom: 1px solid #1a1a22;
+  text-align: left;
+}
+.crosswalk th {
+  color: var(--dim);
+  font-weight: normal;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+}
+.crosswalk .map-arrow { color: var(--dim); }
+
+/* Legal */
+.legal {
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  padding: 0 1rem;
+  font-size: 0.7rem;
+  color: var(--dim);
+  line-height: 1.8;
+  text-align: center;
+}
+.legal strong { color: var(--fg); }
+
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.7rem;
+  color: var(--dim);
+}
+footer .sig { color: var(--accent); font-size: 0.85rem; margin-top: 0.5rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>The Konomi Symbeyond Standard</h1>
+  <div class="fold">
+    2 <span>&times;</span> 3 <span>&times;</span> 5 <span>&times;</span> 7 <span>&times;</span> 11 <span>&times;</span> 13 <span>&times;</span> 17 <span>=</span> 510,510
+  </div>
+  <div class="subtitle">
+    Self-Defining Peer-Sovereign Blockchain Architecture v1.0<br>
+    A Standard That Defines How To Define Itself
+  </div>
+  <div class="authors">
+    <strong>Thomas Frumkin</strong> / ERPC Industries + <strong>John DuCrest</strong> / SYMBEYOND AI LLC
+  </div>
+</header>
+
+<div class="spiral-wrap">
+  <canvas id="spiralCanvas" width="280" height="280"></canvas>
+</div>
+
+<div class="boot">
+  <h3>BOOT SEQUENCE</h3>
+  <div class="boot-leds">
+    <div class="led p2" title="p=2 Identity"></div>
+    <div class="led p3" title="p=3 Storage"></div>
+    <div class="led p5" title="p=5 Content"></div>
+    <div class="led p7" title="p=7 Connection"></div>
+    <div class="led p11" title="p=11 Assembly"></div>
+    <div class="led p13" title="p=13 Chain"></div>
+    <div class="led p17" title="p=17 Observer"></div>
+  </div>
+  <div class="boot-status">ALL PRIMES GREEN &mdash; fold = 510,510</div>
+</div>
+
+<div class="grid">
+  <a href="p2_identity/" class="card p2">
+    <div class="prime">2</div>
+    <h2>SYM-L2 &mdash; Identity</h2>
+    <div class="scope">Cryptographic identity and self-sovereign existence</div>
+    <div class="files">
+      <code>constants.py</code> <code>types.py</code> <code>fingerprint.py</code><br>
+      You exist because you have a key.
+    </div>
+  </a>
+  <a href="p3_storage/" class="card p3">
+    <div class="prime">3</div>
+    <h2>SYM-L3 &mdash; Storage</h2>
+    <div class="scope">Local-first storage with distributed hash table</div>
+    <div class="files">
+      <code>loader.py</code> <code>writer.py</code><br>
+      Your data lives on your device.
+    </div>
+  </a>
+  <a href="p5_content/" class="card p5">
+    <div class="prime">5</div>
+    <h2>SYM-L5 &mdash; Content</h2>
+    <div class="scope">Content creation, signing, and sovereignty</div>
+    <div class="files">
+      <code>processor.py</code> <code>extraction.py</code> <code>sacred_verb.py</code>
+      <code>bridge_api.py</code> <code>legacy.py</code><br>
+      You sign it, it's yours.
+    </div>
+  </a>
+  <a href="p7_connection/" class="card p7">
+    <div class="prime">7</div>
+    <h2>SYM-L7 &mdash; Connection</h2>
+    <div class="scope">Peer-to-peer connectivity and mesh topology</div>
+    <div class="files">
+      <code>geometry.py</code> <code>color_map.py</code> <code>views.py</code>
+      <code>baseline.py</code> <code>decode.py</code> <code>renderer.py</code>
+      <code>live.py</code> <code>grooveburst.py</code> <code>analysis.py</code><br>
+      Direct, no intermediary.
+    </div>
+  </a>
+  <a href="p11_assembly/" class="card p11">
+    <div class="prime">11</div>
+    <h2>SYM-L11 &mdash; Assembly</h2>
+    <div class="scope">Collective state, rooms, CRDT synchronization</div>
+    <div class="files">
+      <code>extractor.py</code> <code>features.py</code> <code>classifiers.py</code>
+      <code>arc.py</code> <code>instruments.py</code> <code>events.py</code>
+      <code>packet_builder.py</code> <code>packet_format.py</code>
+      <code>corpus.py</code> <code>corpus_analysis.py</code><br>
+      Collective without coordinator.
+    </div>
+  </a>
+  <a href="p13_chain/" class="card p13">
+    <div class="prime">13</div>
+    <h2>SYM-L13 &mdash; Chain</h2>
+    <div class="scope">Dual-layer blockchain for permanent records</div>
+    <div class="files">
+      <code>mersenne_table.py</code> <code>lucas_lehmer.py</code>
+      <code>cascade.py</code> <code>bridge.py</code> <code>io.py</code><br>
+      Permanent record on Raspberry Pis.
+    </div>
+  </a>
+  <a href="p17_observer/" class="card p17">
+    <div class="prime">17</div>
+    <h2>SYM-L17 &mdash; Observer</h2>
+    <div class="scope">System self-observation, health monitoring</div>
+    <div class="files">
+      <code>boot.py</code> <code>health.py</code><br>
+      The system watches itself.
+    </div>
+  </a>
+</div>
+
+<div class="crosswalk">
+  <h3>CROSSWALKS</h3>
+  <table>
+    <tr><th>Symbeyond</th><th></th><th>ISA-95</th><th></th><th>A.S.S.-OS</th></tr>
+    <tr><td style="color:var(--p2)">p=2 Identity</td><td class="map-arrow">&rarr;</td><td>L0 Physical</td><td class="map-arrow">&rarr;</td><td>R0 Ground</td></tr>
+    <tr><td style="color:var(--p3)">p=3 Storage</td><td class="map-arrow">&rarr;</td><td>L1 Sensors</td><td class="map-arrow">&rarr;</td><td>R1 Sensors</td></tr>
+    <tr><td style="color:var(--p5)">p=5 Content</td><td class="map-arrow">&rarr;</td><td>L2 Gate/SCADA</td><td class="map-arrow">&rarr;</td><td>R2 Gate</td></tr>
+    <tr><td style="color:var(--p7)">p=7 Connection</td><td class="map-arrow">&rarr;</td><td>L2-L3 Network</td><td class="map-arrow">&rarr;</td><td>R3 Affect</td></tr>
+    <tr><td style="color:var(--p11)">p=11 Assembly</td><td class="map-arrow">&rarr;</td><td>L3 MES</td><td class="map-arrow">&rarr;</td><td>R4 Executive</td></tr>
+    <tr><td style="color:var(--p13)">p=13 Chain</td><td class="map-arrow">&rarr;</td><td>L4 ERP</td><td class="map-arrow">&rarr;</td><td>R5 Identity</td></tr>
+    <tr><td style="color:var(--p17)">p=17 Observer</td><td class="map-arrow">&rarr;</td><td>L4+ BI</td><td class="map-arrow">&rarr;</td><td>R6 Observer</td></tr>
+  </table>
+</div>
+
+<div class="legal">
+  <strong>47 U.S.C. &sect; 151</strong> &mdash; P2P eliminates intermediary cost. The charge is zero.<br>
+  <strong>47 U.S.C. &sect; 230(b)(3)</strong> &mdash; Technologies that maximize user control.<br>
+  <strong>U.S. Const. amend. I</strong> &mdash; P2P communication is both speech and assembly.<br>
+  <strong>U.S. Const. amend. IV</strong> &mdash; E2E encrypted. Data on user devices only.<br>
+  The topology IS the policy.
+</div>
+
+<footer>
+  SpiralSense v3.0 &mdash; Konomi Symbeyond Standard v1.0 &mdash; March 2026<br>
+  44 files &bull; 7 prime layers &bull; fold = 510,510<br>
+  <div class="sig">STD &rarr; UDT &rarr; ENTITY &rarr; RELATION &rarr; RULE &rarr; CROSSWALK &rarr; STD</div>
+</footer>
+
+<script>
+// Spiral visualization — 7 prime arcs
+(function() {
+  const c = document.getElementById('spiralCanvas');
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  const cx = W/2, cy = H/2;
+  const primes = [
+    {p:2,  color:'#ff4444', label:'Identity'},
+    {p:3,  color:'#ff8800', label:'Storage'},
+    {p:5,  color:'#ffdd00', label:'Content'},
+    {p:7,  color:'#00cc44', label:'Connection'},
+    {p:11, color:'#0088ff', label:'Assembly'},
+    {p:13, color:'#8844ff', label:'Chain'},
+    {p:17, color:'#ff44cc', label:'Observer'},
+  ];
+  let t = 0;
+
+  function draw() {
+    ctx.fillStyle = 'rgba(10,10,15,0.08)';
+    ctx.fillRect(0, 0, W, H);
+    t += 0.008;
+
+    primes.forEach((pr, i) => {
+      const n = 200;
+      ctx.beginPath();
+      ctx.strokeStyle = pr.color;
+      ctx.lineWidth = 1.5;
+      ctx.globalAlpha = 0.7;
+      for (let j = 0; j < n; j++) {
+        const frac = j / n;
+        const angle = frac * Math.PI * 4 + t * (pr.p / 7) + i * 0.9;
+        const r = 15 + frac * 110;
+        const x = cx + Math.cos(angle) * r;
+        const y = cy + Math.sin(angle) * r;
+        if (j === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    });
+
+    // Center fold number
+    ctx.fillStyle = '#00ffaa';
+    ctx.font = 'bold 14px Courier New';
+    ctx.textAlign = 'center';
+    ctx.fillText('510,510', cx, cy + 5);
+
+    requestAnimationFrame(draw);
+  }
+
+  // Initial clear
+  ctx.fillStyle = '#0a0a0f';
+  ctx.fillRect(0, 0, W, H);
+  draw();
+})();
+</script>
+</body>
+</html>

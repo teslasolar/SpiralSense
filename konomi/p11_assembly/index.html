@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYM-L11 | p=11 | Assembly — The Collective</title>
+<style>
+:root { --prime: #0088ff; --bg: #0a0a0f; --fg: #e0e0e0; --dim: #555; --card-bg: #12121a; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Courier New',monospace; background:var(--bg); color:var(--fg); min-height:100vh; }
+.back { display:inline-block; padding:1rem; color:var(--dim); text-decoration:none; font-size:0.8rem; }
+.back:hover { color:var(--fg); }
+header { text-align:center; padding:2rem 1rem; border-bottom:1px solid #222; }
+header .p { font-size:4rem; color:var(--prime); opacity:0.2; }
+header h1 { font-size:1.4rem; color:var(--prime); }
+header .scope { color:var(--dim); font-size:0.8rem; margin-top:0.5rem; }
+.philosophy { max-width:600px; margin:2rem auto; padding:0 1rem; text-align:center; font-size:0.85rem; color:var(--dim); line-height:1.8; font-style:italic; }
+.files { max-width:700px; margin:0 auto 2rem; padding:0 1rem; }
+.file { background:var(--card-bg); border-left:3px solid var(--prime); padding:1rem 1.2rem; margin-bottom:1px; }
+.file h3 { font-size:0.85rem; color:var(--prime); margin-bottom:0.3rem; }
+.file p { font-size:0.72rem; color:var(--dim); line-height:1.6; }
+.file .lines { font-size:0.65rem; color:#333; float:right; }
+.udt { max-width:700px; margin:0 auto 2rem; padding:0 1rem; }
+.udt h3 { color:var(--dim); font-size:0.75rem; letter-spacing:0.1em; margin-bottom:0.8rem; text-align:center; }
+.udt pre { background:var(--card-bg); padding:1rem; font-size:0.72rem; line-height:1.7; overflow-x:auto; border-left:3px solid var(--prime); color:var(--fg); }
+footer { text-align:center; padding:2rem; font-size:0.7rem; color:var(--dim); border-top:1px solid #222; }
+</style>
+</head>
+<body>
+<a href="../" class="back">&larr; fold(symbeyond) = 510,510</a>
+
+<header>
+  <div class="p">11</div>
+  <h1>SYM-L11 &mdash; Assembly</h1>
+  <div class="scope">Collective state, rooms, CRDT synchronization</div>
+</header>
+
+<div class="philosophy">
+  "State converges across all peers without a server.<br>
+  No coordinator. No single point of truth. Just math."
+</div>
+
+<div class="files">
+  <div class="file">
+    <span class="lines">28 lines</span>
+    <h3>extractor.py</h3>
+    <p>MetadataExtractor class shell. Loads audio via librosa, delegates to feature extraction and packet building. Every field earned by the data.</p>
+  </div>
+  <div class="file">
+    <span class="lines">36 lines</span>
+    <h3>features.py</h3>
+    <p>Raw feature extraction via librosa. RMS, centroid, ZCR, rolloff, onset, MFCC (13 coefficients), chroma, YIN pitch, HPSS separation, beat tracking.</p>
+  </div>
+  <div class="file">
+    <span class="lines">39 lines</span>
+    <h3>classifiers.py</h3>
+    <p>Register classification (bass&rarr;soprano), texture analysis (harmonic character, surface roughness, brightness), resonance character.</p>
+  </div>
+  <div class="file">
+    <span class="lines">45 lines</span>
+    <h3>arc.py</h3>
+    <p>Emotional arc extraction. Energy thirds analysis, shape classification (PEAK_CENTER, CLIMAX_END, FRONT_LOADED, SUSTAINED), ending character, pitch direction.</p>
+  </div>
+  <div class="file">
+    <span class="lines">49 lines</span>
+    <h3>instruments.py</h3>
+    <p>Pattern-derived instrumentation detection. Male/female vocals, drums, bass guitar, guitar. Confidence-weighted with signal evidence.</p>
+  </div>
+  <div class="file">
+    <span class="lines">32 lines</span>
+    <h3>events.py</h3>
+    <p>Tension/release event detection. Top 5 RMS peaks, fastest drops, brightness spikes, onset density arc (8-segment rhythmic structure).</p>
+  </div>
+  <div class="file">
+    <span class="lines">40 lines</span>
+    <h3>packet_builder.py</h3>
+    <p>Orchestrates packet assembly. Truncates feature arrays, computes scalars (RMS, centroid, ZCR, H/P ratio), delegates to format_packet.</p>
+  </div>
+  <div class="file">
+    <span class="lines">54 lines</span>
+    <h3>packet_format.py</h3>
+    <p>Final SYMB metadata packet structure. Acoustic, voice, instrumentation, emotional arc, events, texture, and SYMB sections. Sacred verb assignment.</p>
+  </div>
+  <div class="file">
+    <span class="lines">51 lines</span>
+    <h3>corpus.py</h3>
+    <p>CorpusReader class. Loads all meta_*.json packets from a folder. Produces collective analysis report with overview, arc, distributions, standouts.</p>
+  </div>
+  <div class="file">
+    <span class="lines">52 lines</span>
+    <h3>corpus_analysis.py</h3>
+    <p>Corpus analysis functions. Dominant pattern counting, overview generation, temporal arc journey, energy/pitch standout detection.</p>
+  </div>
+</div>
+
+<div class="udt">
+  <h3>UDT DEFINITIONS</h3>
+  <pre>UDT:Room
+  id        : ContentHash
+  members   : [Identity.public_key]
+  state     : CRDT (Automerge or Y.js)
+  queue     : [Identity.public_key]
+  settings  : user-defined per room
+
+UDT:CRDT_State
+  type      : G-Counter | LWW-Register | OR-Set | RGA
+  merge     : commutative, associative, idempotent</pre>
+</div>
+
+<footer>
+  One file is a snapshot. Many files is a story.<br>
+  Collective without coordinator. Rooms converge without a server.
+</footer>
+</body>
+</html>

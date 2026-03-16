@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYM-L7 | p=7 | Connection — The Mesh</title>
+<style>
+:root { --prime: #00cc44; --bg: #0a0a0f; --fg: #e0e0e0; --dim: #555; --card-bg: #12121a; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Courier New',monospace; background:var(--bg); color:var(--fg); min-height:100vh; }
+.back { display:inline-block; padding:1rem; color:var(--dim); text-decoration:none; font-size:0.8rem; }
+.back:hover { color:var(--fg); }
+header { text-align:center; padding:2rem 1rem; border-bottom:1px solid #222; }
+header .p { font-size:4rem; color:var(--prime); opacity:0.2; }
+header h1 { font-size:1.4rem; color:var(--prime); }
+header .scope { color:var(--dim); font-size:0.8rem; margin-top:0.5rem; }
+.philosophy { max-width:600px; margin:2rem auto; padding:0 1rem; text-align:center; font-size:0.85rem; color:var(--dim); line-height:1.8; font-style:italic; }
+.files { max-width:700px; margin:0 auto 2rem; padding:0 1rem; }
+.file { background:var(--card-bg); border-left:3px solid var(--prime); padding:1rem 1.2rem; margin-bottom:1px; }
+.file h3 { font-size:0.85rem; color:var(--prime); margin-bottom:0.3rem; }
+.file p { font-size:0.72rem; color:var(--dim); line-height:1.6; }
+.file .lines { font-size:0.65rem; color:#333; float:right; }
+.spectrum { max-width:700px; margin:0 auto 2rem; padding:0 1rem; }
+.spectrum h3 { color:var(--dim); font-size:0.75rem; letter-spacing:0.1em; margin-bottom:0.8rem; text-align:center; }
+.band { display:flex; align-items:center; padding:0.3rem 0; font-size:0.72rem; }
+.band .swatch { width:20px; height:20px; border-radius:3px; margin-right:0.8rem; flex-shrink:0; }
+.band .range { color:var(--dim); width:100px; }
+.band .name { color:var(--fg); }
+.rules { max-width:700px; margin:0 auto 2rem; padding:0 1rem; font-size:0.72rem; color:var(--dim); line-height:2; }
+.rules strong { color:var(--fg); }
+footer { text-align:center; padding:2rem; font-size:0.7rem; color:var(--dim); border-top:1px solid #222; }
+</style>
+</head>
+<body>
+<a href="../" class="back">&larr; fold(symbeyond) = 510,510</a>
+
+<header>
+  <div class="p">7</div>
+  <h1>SYM-L7 &mdash; Connection</h1>
+  <div class="scope">Peer-to-peer connectivity and mesh topology</div>
+</header>
+
+<div class="philosophy">
+  "No node has authority over any other. The mesh has no center."<br>
+  WebRTC peer-to-peer. Direct browser-to-browser. No server carries content.
+</div>
+
+<div class="files">
+  <div class="file">
+    <span class="lines">25 lines</span>
+    <h3>geometry.py</h3>
+    <p>Spiral geometry builder. Dynamic scaling &mdash; radius = time, theta = rotation, z = pitch. All three views share the same coordinates.</p>
+  </div>
+  <div class="file">
+    <span class="lines">20 lines</span>
+    <h3>color_map.py</h3>
+    <p>Pitch-to-color mapping. Logarithmic frequency &rarr; visible spectrum. 7 bands from sub-bass red to extreme-high violet.</p>
+  </div>
+  <div class="file">
+    <span class="lines">61 lines</span>
+    <h3>analysis.py</h3>
+    <p>Audio analysis for visualization. 10-segment temporal markers, silence detection, max tension time, singular pitch events, color distribution.</p>
+  </div>
+  <div class="file">
+    <span class="lines">36 lines</span>
+    <h3>views.py</h3>
+    <p>3D spiral view drawing. 800-segment rendering, pitch-colored, amplitude-weighted line width. Three perspectives: 90&deg; 35&deg; 0&deg;.</p>
+  </div>
+  <div class="file">
+    <span class="lines">62 lines</span>
+    <h3>baseline.py</h3>
+    <p>Temporal baseline ring. 2D circular visualization &mdash; 10 time slices, energy pulses, tension markers, singular moments.</p>
+  </div>
+  <div class="file">
+    <span class="lines">52 lines</span>
+    <h3>decode.py</h3>
+    <p>Decode protocol text panel. Full metadata dump for AI readers &mdash; encoding formulas, spectrum distribution, temporal map.</p>
+  </div>
+  <div class="file">
+    <span class="lines">48 lines</span>
+    <h3>renderer.py</h3>
+    <p>Main render_spiral(). Three-view layout: 36&times;14&rdquo; canvas, three 3D spirals + baseline ring + decode text. 150 DPI PNG output.</p>
+  </div>
+  <div class="file">
+    <span class="lines">29 lines</span>
+    <h3>live.py</h3>
+    <p>Real-time live mode renderer. Single-frame spiral drawing for microphone input. setup_live_renderer() initialization.</p>
+  </div>
+  <div class="file">
+    <span class="lines">53 lines</span>
+    <h3>grooveburst.py</h3>
+    <p>Groove Burst &ldquo;OMG Mode&rdquo; v4.1. Yellow baseline, highs erupt up (yellow&rarr;red), lows plunge down (yellow&rarr;blue). 300 DPI. Black background.</p>
+  </div>
+</div>
+
+<div class="spectrum">
+  <h3>FREQUENCY SPECTRUM &mdash; PITCH AS LIGHT</h3>
+  <div class="band"><div class="swatch" style="background:#FF0000"></div><div class="range">20&ndash;50 Hz</div><div class="name">Sub-bass</div></div>
+  <div class="band"><div class="swatch" style="background:#FF8000"></div><div class="range">50&ndash;160 Hz</div><div class="name">Bass / Body</div></div>
+  <div class="band"><div class="swatch" style="background:#FFFF00"></div><div class="range">160&ndash;500 Hz</div><div class="name">Vocal Core / Warmth</div></div>
+  <div class="band"><div class="swatch" style="background:#00FF00"></div><div class="range">500&ndash;1.6 kHz</div><div class="name">Vocal Clarity</div></div>
+  <div class="band"><div class="swatch" style="background:#0000FF"></div><div class="range">1.6&ndash;5 kHz</div><div class="name">Presence / Harmonics</div></div>
+  <div class="band"><div class="swatch" style="background:#4B0082"></div><div class="range">5&ndash;12 kHz</div><div class="name">Air / Sparkle</div></div>
+  <div class="band"><div class="swatch" style="background:#8B00FF"></div><div class="range">12&ndash;20 kHz</div><div class="name">Extreme Highs</div></div>
+</div>
+
+<div class="rules">
+  <strong>R1:</strong> Connections are direct. No intermediary carries content. &mdash; 47 U.S.C. &sect; 151<br>
+  <strong>R2:</strong> Signaling relay sees metadata only, not content.<br>
+  <strong>R3:</strong> Any node can run a relay. Relay is replaceable.<br>
+  <strong>R4:</strong> Connection cost is zero. P2P eliminates intermediary fees. &mdash; 47 U.S.C. &sect; 151
+</div>
+
+<footer>
+  The topology IS the guarantee &mdash; no center to shut down, no API to throttle.<br>
+  Peers self-organize into cube topology (8 neighbors + &Omega; coordinator per cluster).
+</footer>
+</body>
+</html>

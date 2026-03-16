@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYM-L3 | p=3 | Storage — The Mesh Memory</title>
+<style>
+:root { --prime: #ff8800; --bg: #0a0a0f; --fg: #e0e0e0; --dim: #555; --card-bg: #12121a; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Courier New',monospace; background:var(--bg); color:var(--fg); min-height:100vh; }
+.back { display:inline-block; padding:1rem; color:var(--dim); text-decoration:none; font-size:0.8rem; }
+.back:hover { color:var(--fg); }
+header { text-align:center; padding:2rem 1rem; border-bottom:1px solid #222; }
+header .p { font-size:4rem; color:var(--prime); opacity:0.2; }
+header h1 { font-size:1.4rem; color:var(--prime); }
+header .scope { color:var(--dim); font-size:0.8rem; margin-top:0.5rem; }
+.philosophy { max-width:600px; margin:2rem auto; padding:0 1rem; text-align:center; font-size:0.85rem; color:var(--dim); line-height:1.8; font-style:italic; }
+.files { max-width:700px; margin:0 auto 2rem; padding:0 1rem; }
+.file { background:var(--card-bg); border-left:3px solid var(--prime); padding:1rem 1.2rem; margin-bottom:1px; }
+.file h3 { font-size:0.85rem; color:var(--prime); margin-bottom:0.3rem; }
+.file p { font-size:0.72rem; color:var(--dim); line-height:1.6; }
+.file .lines { font-size:0.65rem; color:#333; float:right; }
+.udt { max-width:700px; margin:0 auto 2rem; padding:0 1rem; }
+.udt h3 { color:var(--dim); font-size:0.75rem; letter-spacing:0.1em; margin-bottom:0.8rem; text-align:center; }
+.udt pre { background:var(--card-bg); padding:1rem; font-size:0.72rem; line-height:1.7; overflow-x:auto; border-left:3px solid var(--prime); color:var(--fg); }
+.rules { max-width:700px; margin:0 auto 2rem; padding:0 1rem; font-size:0.72rem; color:var(--dim); line-height:2; }
+.rules strong { color:var(--fg); }
+footer { text-align:center; padding:2rem; font-size:0.7rem; color:var(--dim); border-top:1px solid #222; }
+</style>
+</head>
+<body>
+<a href="../" class="back">&larr; fold(symbeyond) = 510,510</a>
+
+<header>
+  <div class="p">3</div>
+  <h1>SYM-L3 &mdash; Storage</h1>
+  <div class="scope">Local-first storage with distributed hash table</div>
+</header>
+
+<div class="philosophy">
+  "Your data is yours because it physically lives on your hardware."<br>
+  No cloud required. Data lives on your device first.
+</div>
+
+<div class="files">
+  <div class="file">
+    <span class="lines">40 lines</span>
+    <h3>loader.py</h3>
+    <p>Audio file loading via soundfile/librosa. Local-first data access. Graceful fallback to synthetic test tone if file unavailable. Supports WAV, MP3, FLAC.</p>
+  </div>
+  <div class="file">
+    <span class="lines">19 lines</span>
+    <h3>writer.py</h3>
+    <p>JSON persistence layer. Saves SYMB signatures and metadata packets to disk. Auto-creates directories. Production: AES-256-GCM encryption at rest.</p>
+  </div>
+</div>
+
+<div class="udt">
+  <h3>UDT DEFINITIONS</h3>
+  <pre>UDT:LocalStore
+  engine    : IndexedDB
+  encrypted : AES-256-GCM (key derived from identity)
+  capacity  : device-limited
+  sync      : optional DHT replication
+
+UDT:DHTEntry
+  key       : ContentHash
+  value     : encrypted blob
+  replicas  : 3-7 peers (configurable)
+  ttl       : Duration | permanent</pre>
+</div>
+
+<div class="rules">
+  <strong>R1:</strong> All data encrypted at rest with identity-derived key.<br>
+  <strong>R2:</strong> No data leaves device without explicit user action.<br>
+  <strong>R3:</strong> DHT replication preserves encryption &mdash; peers store blobs they cannot read. &mdash; U.S. Const. amend. IV
+</div>
+
+<footer>
+  The mesh memory. Optionally replicates to peers via DHT.<br>
+  No cloud required. No server to subpoena.
+</footer>
+</body>
+</html>

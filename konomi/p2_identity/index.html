@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYM-L2 | p=2 | Identity — The Kernel</title>
+<style>
+:root { --prime: #ff4444; --bg: #0a0a0f; --fg: #e0e0e0; --dim: #555; --card-bg: #12121a; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Courier New',monospace; background:var(--bg); color:var(--fg); min-height:100vh; }
+.back { display:inline-block; padding:1rem; color:var(--dim); text-decoration:none; font-size:0.8rem; }
+.back:hover { color:var(--fg); }
+header { text-align:center; padding:2rem 1rem; border-bottom:1px solid #222; }
+header .p { font-size:4rem; color:var(--prime); opacity:0.2; }
+header h1 { font-size:1.4rem; color:var(--prime); }
+header .scope { color:var(--dim); font-size:0.8rem; margin-top:0.5rem; }
+.philosophy { max-width:600px; margin:2rem auto; padding:0 1rem; text-align:center; font-size:0.85rem; color:var(--dim); line-height:1.8; font-style:italic; }
+.files { max-width:700px; margin:0 auto 2rem; padding:0 1rem; }
+.file { background:var(--card-bg); border-left:3px solid var(--prime); padding:1rem 1.2rem; margin-bottom:1px; }
+.file h3 { font-size:0.85rem; color:var(--prime); margin-bottom:0.3rem; }
+.file p { font-size:0.72rem; color:var(--dim); line-height:1.6; }
+.file .lines { font-size:0.65rem; color:#333; float:right; }
+.udt { max-width:700px; margin:0 auto 2rem; padding:0 1rem; }
+.udt h3 { color:var(--dim); font-size:0.75rem; letter-spacing:0.1em; margin-bottom:0.8rem; text-align:center; }
+.udt pre { background:var(--card-bg); padding:1rem; font-size:0.72rem; line-height:1.7; overflow-x:auto; border-left:3px solid var(--prime); color:var(--fg); }
+.rules { max-width:700px; margin:0 auto 2rem; padding:0 1rem; font-size:0.72rem; color:var(--dim); line-height:2; }
+.rules strong { color:var(--fg); }
+.state { max-width:700px; margin:0 auto 2rem; padding:0 1rem; text-align:center; }
+.state code { background:var(--card-bg); padding:0.5rem 1rem; font-size:0.8rem; color:var(--prime); display:inline-block; margin:0.3rem; border-radius:4px; }
+.state .arrow { color:var(--dim); }
+footer { text-align:center; padding:2rem; font-size:0.7rem; color:var(--dim); border-top:1px solid #222; }
+</style>
+</head>
+<body>
+<a href="../" class="back">&larr; fold(symbeyond) = 510,510</a>
+
+<header>
+  <div class="p">2</div>
+  <h1>SYM-L2 &mdash; Identity</h1>
+  <div class="scope">Cryptographic identity and self-sovereign existence</div>
+</header>
+
+<div class="philosophy">
+  "You exist because you have a key, not because a platform permits you to exist."<br>
+  Ed25519 keypair generation. No signup, no email, no server.
+</div>
+
+<div class="state">
+  <code>UNBORN</code> <span class="arrow">&rarr; [generate_key] &rarr;</span>
+  <code>ACTIVE</code> <span class="arrow">&rarr; [revoke] &rarr;</span>
+  <code>REVOKED</code>
+</div>
+
+<div class="files">
+  <div class="file">
+    <span class="lines">38 lines</span>
+    <h3>constants.py</h3>
+    <p>SYMB_VERSION, KONOMI_CONSTANT (&kappa; = 1/&Phi;), Sacred Nine verbs, frequency bands, vocal register map, chromatic notes. The kernel values that define the system.</p>
+  </div>
+  <div class="file">
+    <span class="lines">39 lines</span>
+    <h3>types.py</h3>
+    <p>HarmonicFrame (single time-slice) and SYMBSignature (full audio segment). The UDTs &mdash; user-defined types FIRST. These are the atoms of the system.</p>
+  </div>
+  <div class="file">
+    <span class="lines">17 lines</span>
+    <h3>fingerprint.py</h3>
+    <p>SHA-256 source fingerprint and MD5 frame tags. Content is identified by what it IS, not where it lives. Same content = same hash, anywhere, forever.</p>
+  </div>
+</div>
+
+<div class="udt">
+  <h3>UDT DEFINITIONS</h3>
+  <pre>UDT:KeyPair
+  algorithm  : Ed25519
+  public_key : 32 bytes
+  private_key: 64 bytes
+  derivation : Web Crypto API
+
+UDT:Identity
+  keypair      : KeyPair
+  display_name : str | null
+  avatar_hash  : ContentHash | null
+  created      : Timestamp
+  web_of_trust : [KeyPair.public_key]
+
+UDT:IdentityProof
+  challenge : random 32 bytes
+  response  : Ed25519.sign(challenge, private_key)
+  verify    : Ed25519.verify(response, public_key) = true</pre>
+</div>
+
+<div class="rules">
+  <strong>R1:</strong> Identity is generated locally. No server involved. &mdash; 47 U.S.C. &sect; 230(b)(3)<br>
+  <strong>R2:</strong> Private key never leaves the device. &mdash; U.S. Const. amend. IV<br>
+  <strong>R3:</strong> Identity cannot be revoked by any external authority. &mdash; U.S. Const. amend. I
+</div>
+
+<footer>
+  Recursion: A single keypair is a complete identity. A group of keypairs forms a web of trust.<br>
+  The web of trust is itself an identity (a community). Same structure, different scale.
+</footer>
+</body>
+</html>
