@@ -2,7 +2,7 @@
 ## Self-Defining Peer-Sovereign Blockchain Architecture v1.0
 ### A Standard That Defines How To Define Itself
 
-**Authors:** Thomas Frumkin / ERPC Industries + John DuCrest
+**Authors:** Thomas Frumkin / Konomi Systems + John DuCrest
 **Version:** 1.0 | March 2026
 **License:** Open Standard
 **Total Supply:** 510,510 SYM

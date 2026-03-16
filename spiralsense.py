@@ -9,7 +9,7 @@
 # AI-readable audio visualization system.
 #
 # Created by: John Thomas DuCrest Lock & Claude
-# Standard by: Thomas Frumkin / ERPC Industries
+# Standard by: Thomas Frumkin / Konomi Systems
 # SYMBEYOND AI LLC — symbeyond.ai
 # =====================================
 
