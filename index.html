@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpiralSense — Audio → Mathematics → Sovereignty</title>
+<style>
+:root {
+  --bg: #0a0a0f;
+  --fg: #e0e0e0;
+  --accent: #00ffaa;
+  --dim: #555;
+  --prime: #ff44cc;
+  --p2: #ff4444;
+  --p3: #ff8800;
+  --p5: #ffdd00;
+  --p7: #00cc44;
+  --p11: #0088ff;
+  --p13: #8844ff;
+  --p17: #ff44cc;
+  --card-bg: #12121a;
+  --border: #222;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Courier New', monospace;
+  background: var(--bg);
+  color: var(--fg);
+  min-height: 100vh;
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 4rem 1rem 3rem;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.hero canvas {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.25;
+  pointer-events: none;
+}
+.hero h1 {
+  font-size: 2.4rem;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  position: relative;
+}
+.hero .tagline {
+  color: var(--dim);
+  font-size: 1rem;
+  margin-top: 0.8rem;
+  position: relative;
+}
+.hero .fold {
+  font-size: 1.8rem;
+  color: var(--accent);
+  margin: 1.5rem 0 0.5rem;
+  font-weight: bold;
+  position: relative;
+}
+.hero .fold span { opacity: 0.35; }
+.hero .authors {
+  color: var(--dim);
+  font-size: 0.75rem;
+  margin-top: 1rem;
+  position: relative;
+}
+.hero .authors strong { color: var(--fg); }
+
+/* What is this */
+.what {
+  max-width: 720px;
+  margin: 3rem auto;
+  padding: 0 1.5rem;
+  text-align: center;
+}
+.what h2 {
+  color: var(--accent);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.08em;
+}
+.what p {
+  color: var(--dim);
+  font-size: 0.85rem;
+  line-height: 1.9;
+  margin-bottom: 1rem;
+}
+.what strong { color: var(--fg); }
+
+/* Pipeline */
+.pipeline {
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  padding: 0 1rem;
+}
+.pipeline h3 {
+  color: var(--dim);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.pipe-steps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0;
+  align-items: center;
+}
+.pipe-step {
+  background: var(--card-bg);
+  padding: 0.8rem 1.2rem;
+  text-align: center;
+  border-bottom: 2px solid var(--dim);
+}
+.pipe-step .label {
+  font-size: 0.7rem;
+  color: var(--dim);
+  margin-bottom: 0.3rem;
+}
+.pipe-step .value {
+  font-size: 0.85rem;
+  color: var(--fg);
+}
+.pipe-arrow {
+  color: var(--dim);
+  font-size: 1.2rem;
+  padding: 0 0.3rem;
+}
+.pipe-step:nth-child(1)  { border-color: var(--p2); }
+.pipe-step:nth-child(3)  { border-color: var(--p5); }
+.pipe-step:nth-child(5)  { border-color: var(--p7); }
+.pipe-step:nth-child(7)  { border-color: var(--p11); }
+.pipe-step:nth-child(9)  { border-color: var(--p13); }
+.pipe-step:nth-child(11) { border-color: var(--p17); }
+
+/* Enter the Standard */
+.enter {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 3rem;
+}
+.enter a {
+  display: inline-block;
+  padding: 1rem 3rem;
+  background: var(--card-bg);
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.enter a:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+.enter .sub {
+  color: var(--dim);
+  font-size: 0.72rem;
+  margin-top: 0.8rem;
+}
+
+/* Boot LEDs */
+.boot {
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+}
+.boot h3 {
+  color: var(--dim);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  margin-bottom: 1rem;
+}
+.boot-leds {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.led-group {
+  text-align: center;
+}
+.led {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  margin: 0 auto 0.4rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+.led-group .name {
+  font-size: 0.6rem;
+  color: var(--dim);
+}
+.led.p2  { background: var(--p2); animation-delay: 0s; }
+.led.p3  { background: var(--p3); animation-delay: 0.15s; }
+.led.p5  { background: var(--p5); animation-delay: 0.3s; }
+.led.p7  { background: var(--p7); animation-delay: 0.45s; }
+.led.p11 { background: var(--p11); animation-delay: 0.6s; }
+.led.p13 { background: var(--p13); animation-delay: 0.75s; }
+.led.p17 { background: var(--p17); animation-delay: 0.9s; }
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; box-shadow: none; }
+  50% { opacity: 1; box-shadow: 0 0 14px currentColor; }
+}
+.boot-status {
+  font-size: 0.8rem;
+  color: var(--accent);
+}
+
+/* Principles */
+.principles {
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  padding: 0 1.5rem;
+}
+.principles h3 {
+  color: var(--dim);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.principle {
+  display: flex;
+  padding: 0.6rem 0;
+  font-size: 0.8rem;
+  border-bottom: 1px solid #1a1a22;
+}
+.principle .num {
+  color: var(--accent);
+  width: 2.5rem;
+  flex-shrink: 0;
+  text-align: right;
+  margin-right: 1rem;
+  font-weight: bold;
+}
+.principle .text { color: var(--dim); line-height: 1.6; }
+.principle .text strong { color: var(--fg); }
+
+/* Tech stack */
+.stack {
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  padding: 0 1.5rem;
+}
+.stack h3 {
+  color: var(--dim);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.stack-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+}
+.stack-item {
+  background: var(--card-bg);
+  padding: 0.8rem 1rem;
+  font-size: 0.75rem;
+}
+.stack-item .key { color: var(--dim); margin-bottom: 0.2rem; }
+.stack-item .val { color: var(--fg); }
+
+/* Legal */
+.legal {
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  padding: 0 1.5rem;
+  font-size: 0.7rem;
+  color: var(--dim);
+  line-height: 2;
+  text-align: center;
+}
+.legal strong { color: var(--fg); }
+
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.7rem;
+  color: var(--dim);
+}
+footer .sig { color: var(--accent); font-size: 1rem; margin-top: 0.5rem; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <canvas id="bgSpiral" width="600" height="400"></canvas>
+  <h1>SpiralSense</h1>
+  <div class="tagline">Audio &rarr; Mathematics &rarr; Sovereignty</div>
+  <div class="fold">
+    2 <span>&times;</span> 3 <span>&times;</span> 5 <span>&times;</span> 7 <span>&times;</span> 11 <span>&times;</span> 13 <span>&times;</span> 17 <span>=</span> 510,510
+  </div>
+  <div class="authors">
+    <strong>Thomas Frumkin</strong> / ERPC Industries &ensp;&bull;&ensp; <strong>John DuCrest</strong> / SYMBEYOND AI LLC
+  </div>
+</div>
+
+<div class="what">
+  <h2>What Is This?</h2>
+  <p>
+    <strong>SpiralSense</strong> is an audio intelligence system that converts sound into
+    <strong>3D spiral geometry</strong>, extracts <strong>harmonic signatures</strong>, and translates
+    audio into <strong>Lucas-Lehmer mathematical cascades</strong> via the Mersenne Bridge.
+  </p>
+  <p>
+    It is built on the <strong>Konomi Symbeyond Standard</strong> &mdash; a self-defining,
+    peer-sovereign architecture where every layer maps to a prime factor of
+    <strong>510,510</strong>. Seven primes. Seven layers. One fold value.
+  </p>
+  <p>
+    No servers. No intermediaries. No algorithmic gatekeepers.<br>
+    <strong>The topology is the policy.</strong>
+  </p>
+</div>
+
+<div class="pipeline">
+  <h3>THE PIPELINE</h3>
+  <div class="pipe-steps">
+    <div class="pipe-step"><div class="label">Waveform</div><div class="value">Audio Input</div></div>
+    <div class="pipe-arrow">&rarr;</div>
+    <div class="pipe-step"><div class="label">p=5 FFT</div><div class="value">Harmonics</div></div>
+    <div class="pipe-arrow">&rarr;</div>
+    <div class="pipe-step"><div class="label">p=7 Geometry</div><div class="value">3D Spiral</div></div>
+    <div class="pipe-arrow">&rarr;</div>
+    <div class="pipe-step"><div class="label">p=11 Assembly</div><div class="value">SYMB Packet</div></div>
+    <div class="pipe-arrow">&rarr;</div>
+    <div class="pipe-step"><div class="label">p=13 Bridge</div><div class="value">Mersenne Cascade</div></div>
+    <div class="pipe-arrow">&rarr;</div>
+    <div class="pipe-step"><div class="label">p=17 Observer</div><div class="value">Health &amp; Boot</div></div>
+  </div>
+</div>
+
+<div class="boot">
+  <h3>SYSTEM STATUS</h3>
+  <div class="boot-leds">
+    <div class="led-group"><div class="led p2"></div><div class="name">Identity</div></div>
+    <div class="led-group"><div class="led p3"></div><div class="name">Storage</div></div>
+    <div class="led-group"><div class="led p5"></div><div class="name">Content</div></div>
+    <div class="led-group"><div class="led p7"></div><div class="name">Connection</div></div>
+    <div class="led-group"><div class="led p11"></div><div class="name">Assembly</div></div>
+    <div class="led-group"><div class="led p13"></div><div class="name">Chain</div></div>
+    <div class="led-group"><div class="led p17"></div><div class="name">Observer</div></div>
+  </div>
+  <div class="boot-status">ALL PRIMES GREEN &mdash; fold = 510,510</div>
+</div>
+
+<div class="enter">
+  <a href="konomi/">ENTER THE STANDARD &rarr;</a>
+  <div class="sub">7 prime layers &bull; 44 Python files &bull; Full architecture map</div>
+</div>
+
+<div class="principles">
+  <h3>DESIGN PRINCIPLES</h3>
+  <div class="principle"><div class="num">01</div><div class="text"><strong>Prime decomposition is architecture.</strong> Each layer exists because its prime exists in 510,510.</div></div>
+  <div class="principle"><div class="num">02</div><div class="text"><strong>Every file under 250 tokens.</strong> If a module grows, it splits. Complexity is fractal, not monolithic.</div></div>
+  <div class="principle"><div class="num">03</div><div class="text"><strong>Local-first, peer-sovereign.</strong> Your data lives on your device. No server carries content.</div></div>
+  <div class="principle"><div class="num">04</div><div class="text"><strong>Sound becomes mathematics.</strong> Audio &rarr; FFT harmonics &rarr; spiral geometry &rarr; Lucas-Lehmer cascades &rarr; Mersenne primes.</div></div>
+  <div class="principle"><div class="num">05</div><div class="text"><strong>The standard defines how to extend itself.</strong> STD &rarr; UDT &rarr; ENTITY &rarr; RELATION &rarr; RULE &rarr; CROSSWALK &rarr; STD.</div></div>
+  <div class="principle"><div class="num">06</div><div class="text"><strong>Runs on a Raspberry Pi.</strong> $35 hardware. Decentralization is a hardware specification.</div></div>
+  <div class="principle"><div class="num">07</div><div class="text"><strong>The observer is inside the system it observes.</strong> p=17 watches p=2 through p=13. You watch p=17. You are a node.</div></div>
+</div>
+
+<div class="stack">
+  <h3>TECHNOLOGY</h3>
+  <div class="stack-grid">
+    <div class="stack-item"><div class="key">Language</div><div class="val">Python 3.10+</div></div>
+    <div class="stack-item"><div class="key">Audio</div><div class="val">NumPy FFT / librosa / soundfile</div></div>
+    <div class="stack-item"><div class="key">Visualization</div><div class="val">Matplotlib 3D spirals</div></div>
+    <div class="stack-item"><div class="key">Math Bridge</div><div class="val">Lucas-Lehmer / Mersenne</div></div>
+    <div class="stack-item"><div class="key">Identity</div><div class="val">Ed25519 keypair / SHA-256</div></div>
+    <div class="stack-item"><div class="key">Network</div><div class="val">WebRTC P2P / libp2p</div></div>
+    <div class="stack-item"><div class="key">State Sync</div><div class="val">CRDTs (Automerge / Y.js)</div></div>
+    <div class="stack-item"><div class="key">Hardware</div><div class="val">Raspberry Pi 4 ($35)</div></div>
+  </div>
+</div>
+
+<div class="legal">
+  <strong>47 U.S.C. &sect; 151</strong> &mdash; P2P eliminates intermediary cost. The charge is zero.<br>
+  <strong>47 U.S.C. &sect; 230(b)(3)</strong> &mdash; Technologies that maximize user control.<br>
+  <strong>U.S. Const. amend. I</strong> &mdash; P2P communication is both speech and assembly.<br>
+  <strong>U.S. Const. amend. IV</strong> &mdash; E2E encrypted. Data on user devices only.
+</div>
+
+<footer>
+  SpiralSense v3.0 &mdash; Konomi Symbeyond Standard v1.0 &mdash; March 2026<br>
+  <div class="sig">Start with p=2. Generate a keypair. You exist. 510,510</div>
+</footer>
+
+<script>
+(function() {
+  const c = document.getElementById('bgSpiral');
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  const cx = W/2, cy = H/2;
+  const colors = ['#ff4444','#ff8800','#ffdd00','#00cc44','#0088ff','#8844ff','#ff44cc'];
+  const ps = [2,3,5,7,11,13,17];
+  let t = 0;
+
+  function draw() {
+    ctx.fillStyle = 'rgba(10,10,15,0.06)';
+    ctx.fillRect(0, 0, W, H);
+    t += 0.006;
+    ps.forEach((p, i) => {
+      ctx.beginPath();
+      ctx.strokeStyle = colors[i];
+      ctx.lineWidth = 1.2;
+      ctx.globalAlpha = 0.5;
+      const n = 300;
+      for (let j = 0; j < n; j++) {
+        const f = j / n;
+        const a = f * Math.PI * 5 + t * (p / 7) + i * 0.9;
+        const r = 10 + f * 180;
+        const x = cx + Math.cos(a) * r;
+        const y = cy + Math.sin(a) * r * 0.6;
+        if (j === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    });
+    requestAnimationFrame(draw);
+  }
+  ctx.fillStyle = '#0a0a0f';
+  ctx.fillRect(0, 0, W, H);
+  draw();
+})();
+</script>
+</body>
+</html>
